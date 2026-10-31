@@ -58,13 +58,13 @@ listed most important first. Category letters (A-H) are also used in the README 
 and scorecards. When adding a criterion, give it the next free C number and place it
 in a category.
 
-- **A. Connector ecosystem**: C25, C01, C23, C02
+- **A. Connector ecosystem**: C25, C01, C23, C32, C33, C34, C02
 - **B. Google Workspace**: C03, C04, C05, C06, C07, C12
 - **C. Multiple accounts per connector**: C08, C09, C10, C11
-- **D. Connector usage and control**: C19, C20
-- **E. Own infrastructure and local tools**: C24, C30, C31
+- **D. Connector usage and control**: C19, C20, C36
+- **E. Own infrastructure and local tools**: C31, C24, C30
 - **F. Data ownership**: C26, C27, C28
-- **G. Agents, projects and coding**: C29, C22, C21
+- **G. Agents, projects and coding**: C35, C29, C22, C21, C37, C38
 - **H. Clients and platforms**: C13, C14, C15, C16, C17, C18
 
 ## A. Connector ecosystem
@@ -115,6 +115,56 @@ vendor is investing in the ecosystem.
 HTTP, SSE); auth supported (OAuth, bearer/API-key header, none); which tiers; which
 clients (web, desktop, mobile: a server added on web may not work on Android); whether
 an admin must approve it on business plans; any limits on tools per server.
+
+### C32 Progressive tool discovery and tool limits (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** Does the platform load every connected tool's definition into context up
+front, or discover tools progressively (tool search, deferred loading, loading a
+server's tools only when it is needed)? What limits apply to the number of tools?
+
+**Why it matters:** an AI gateway exposes hundreds of tools. With eager loading, a
+hard tool cap or context bloat makes that unusable; with progressive discovery it works.
+
+**Score:** `Progressive` (native search/deferred loading) / `Eager, high limit` /
+`Eager, low limit` / `?`.
+
+**Record:** documented and observed limits (tools per server, per chat, total enabled
+servers), what happens at the limit (error, silent truncation, tools dropped), and
+whether progressive loading applies to custom MCP servers as well as catalogue ones.
+
+### C33 Plugin packaging format (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** How does the platform expect a plugin (a bundle of connectors/MCP servers,
+instructions, skills, commands) to be packaged and declared? Is the format an open
+standard or proprietary?
+
+**Score:** `Standard` (an open, cross-vendor format, e.g. MCP server config, Agent
+Skills `SKILL.md`, a documented manifest other tools also read) / `Documented
+proprietary` / `Closed` (only the vendor or approved partners can publish) / `No
+plugins` / `?`.
+
+**Record:** the manifest file and schema (name, link to spec), what a plugin can
+contain, whether it can be installed from a local path or Git URL, and whether the
+same package works in another vendor's tool.
+
+### C34 Custom marketplaces (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** Can you add your own plugin marketplaces (catalogues/registries), beyond the
+vendor's? Is there a limit to how many? What format must a marketplace be in?
+
+**Score:** `Yes` (number allowed, or `Unlimited`) / `Partial` (e.g. admin-only, one
+private catalogue on business plans) / `No` / `?`, plus `Standard` or `Proprietary`
+format.
+
+**Record:** how a marketplace is declared (Git repo with a manifest, JSON URL, MCP
+registry API), the documented or observed limit on marketplaces, whether private
+(authenticated) marketplaces work, and whether marketplaces sync across clients.
 
 ### C02 Connector access by subscription tier (`general`)
 
@@ -278,9 +328,42 @@ or "reads run automatically, writes need approval".
 or "always", whether the policy applies to custom connectors too, and how approval works
 for background/scheduled tasks (in-app prompt, push notification, task waits vs fails).
 
+### C36 Autonomy modes and permission structure (`daniel`)
+
+_Added 2026-10-31. Broader than C20: C20 is approval of connector calls; this is the
+overall autonomy dial for everything the agent does (connectors, shell, files, browser)._
+
+**Asks:** What levels of agent supervision are available, from fully supervised to
+fully autonomous ("YOLO" / bypass permissions), and how is the permission structure
+built?
+
+**Score:** `Full range` (several named modes, from ask-for-everything to fully
+autonomous, plus allow/deny rules) / `Partial` (e.g. supervised or autonomous, nothing
+between; or rules without modes) / `Supervised only` / `Autonomous only` / `?`.
+
+**Record:** the mode names (e.g. plan / ask / auto-accept edits / bypass), how rules are
+expressed (per tool, per command pattern, per path, per connector), where they are
+stored (user, project, admin-managed policy) and which layer wins, whether mode can be
+switched mid-session, and whether chat app and CLI share the same model.
+
 ## E. Own infrastructure and local tools
 
 Reaching things you host: gateways, home network tools, your own servers.
+
+### C31 Distributed deployments / satellites (`daniel`, `priority: top`)
+
+_Raised to `priority: top` 2026-10-31, alongside C35 (delegation between instances is key)._
+
+**Asks:** Is there built-in support for a network of deployments, e.g. the main app
+here plus a CLI installed on a local server that acts as a subagent or satellite the
+main app can delegate to?
+
+**Score:** `Native` (official pairing of instances; main app can dispatch tasks to a
+remote CLI/agent) / `Partial` (e.g. remote control of one CLI session, no delegation)
+/ `DIY` (only by wrapping the CLI as an MCP server yourself) / `No` / `?`.
+
+**Record:** how instances are paired and authenticated, whether the satellite can use
+its local tools/files on behalf of the main app, and whether this works from mobile.
 
 ### C24 Tunnels to own infrastructure / AI gateway (`daniel`, `priority: high`)
 
@@ -321,19 +404,6 @@ Assistant natively?
 **Record:** the concrete Home Assistant route (official connector, HA's MCP server
 integration, a desktop app reaching the LAN), which clients it works from (mobile often
 cannot reach local tools), and user reports.
-
-### C31 Distributed deployments / satellites (`daniel`)
-
-**Asks:** Is there built-in support for a network of deployments, e.g. the main app
-here plus a CLI installed on a local server that acts as a subagent or satellite the
-main app can delegate to?
-
-**Score:** `Native` (official pairing of instances; main app can dispatch tasks to a
-remote CLI/agent) / `Partial` (e.g. remote control of one CLI session, no delegation)
-/ `DIY` (only by wrapping the CLI as an MCP server yourself) / `No` / `?`.
-
-**Record:** how instances are paired and authenticated, whether the satellite can use
-its local tools/files on behalf of the main app, and whether this works from mobile.
 
 ## F. Data ownership
 
@@ -378,6 +448,23 @@ backend) / `Forced built-in` / `?`.
 
 Work that outlives a single chat: background agents, project boundaries, the companion coding product.
 
+### C35 Agent-to-agent (A2A) support (`daniel`, `priority: top`)
+
+_Added 2026-10-31._
+
+**Asks:** Can the assistant talk to other agents as peers: call an external agent,
+be called by one, and delegate tasks between its own instances? Does it support an
+open agent-to-agent protocol (e.g. Google's A2A, now under the Linux Foundation) or
+only a proprietary mechanism?
+
+**Score:** `Standard A2A` (open protocol, as client and/or server) / `Proprietary`
+(delegation works, vendor-only mechanism) / `Subagents only` (spawns its own
+subagents within a task, no external agents) / `No` / `?`.
+
+**Record:** direction (can call agents, can be called, both), which protocol and
+version, auth between agents, whether delegated agents keep their own tools and
+connectors, and how results come back. Links to C31 (delegation to satellite instances).
+
 ### C29 Background agents, scheduled tasks and reminders (`daniel`)
 
 **Asks:** Can you create background or persistent agents that run tasks without an open
@@ -417,6 +504,37 @@ chat assistant), and how is it handled relative to the chat app?
 **Record:** whether it is included in the same subscription, whether connectors/MCP
 configured in the chat app carry over to the CLI, and whether a web/cloud version of the
 coding agent shows up inside the chat app.
+
+### C37 CLI working-directory binding (`daniel`)
+
+_Added 2026-10-31. Applies to the vendor's CLI (C14, C21); `N/A` if there is none._
+
+**Asks:** How tightly is the CLI bound to the directory it was launched in? Can it
+read, write and run commands in arbitrary directories, or only inside the CWD tree?
+
+**Score:** `Arbitrary` (any path, subject to permissions) / `Expandable` (CWD by
+default; extra directories can be added per session or in config) / `Strict` (CWD
+tree only) / `N/A` / `?`.
+
+**Record:** whether the binding is enforced by the permission system or by a sandbox,
+how extra directories are added (flag, command, config), whether project config and
+memory are keyed to the CWD (and so lost when launched elsewhere), and whether it can
+be run from `~` as a general assistant.
+
+### C38 Native GitHub integration (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** Is there a native, vendor-supported GitHub integration (connector or
+built-in), rather than only a custom MCP server or the CLI calling `gh`?
+
+**Score:** `Read-write` (can create/edit files, issues, PRs, commit) / `Read-only`
+(search and read repos) / `Custom only` (only via a self-added GitHub MCP server) /
+`No` / `?`.
+
+**Record:** connector vs GitHub App vs OAuth, private repo access, org access, which
+actions are supported, whether it works in chat, in the coding agent, or both, and
+whether the cloud coding agent can open PRs.
 
 ## H. Clients and platforms
 
