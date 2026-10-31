@@ -350,3 +350,104 @@ network, your own MCP/AI gateway) from the assistant? If so, how is it implement
 (e.g. can it pass Cloudflare Access service-token headers, or OAuth only), and **user
 feedback**: a short summary of reports from forums, GitHub issues, Reddit, with links
 and dates (reliability, timeouts, auth breakage, IP allowlisting).
+
+## Purpose, data ownership, agents and local infrastructure group (C25-C31)
+
+Added 2026-10-31.
+
+### C25 Purpose-built for integrations (`daniel`, `priority: top`)
+
+A looser, judgement-based criterion, and the one Daniel most wants to find a strong
+match for.
+
+**Asks:** Is connecting an AI to external tools the platform's main purpose (a
+specialist platform built precisely for this), or is it a general conversational tool
+with an integration feature added on?
+
+**Score:** `Integration-first` / `General + integrations` / `?`.
+
+**Record:** the evidence for the call (positioning, where connectors sit in the UI and
+docs, whether the product is usable at all without them, depth of connector management:
+profiles, permissions, logs, testing).
+
+### C26 Output routing to own storage (`daniel`)
+
+Expected to be rare; Daniel has not seen it anywhere (2026-10-31).
+
+**Asks:** Is there native support for routing conversations (and/or outputs, files) to
+storage you own as they happen, e.g. a Drive folder, S3/R2 bucket, Git repo, webhook,
+local folder?
+
+**Score:** `Yes` / `Partial` (e.g. one destination only, manual per chat) / `No` / `?`.
+
+**Record:** destinations supported, automatic vs manual, format (Markdown, JSON).
+
+### C27 Backup / export API (`daniel`)
+
+**Asks:** Is there a native API (or scheduled export) for getting your data out
+(conversations, projects, memory, files) to somewhere else?
+
+**Score:** `API` (programmatic, on demand) / `Scheduled export` / `Manual export only`
+(e.g. a "download my data" email) / `No` / `?`.
+
+**Record:** what is included (memory and project files are often missing), format,
+whether business plans get a compliance/export API that consumer plans don't.
+
+### C28 Bring your own memory (`daniel`)
+
+**Asks:** Is there native, first-party support for using your own memory store (e.g. an
+external memory MCP server or API), or are you forced to use the tool's built-in memory?
+
+**Score:** `First-party BYO` (built-in memory can be replaced or disabled in favour of
+yours, with official support) / `Workaround` (built-in memory can be turned off and an
+external memory connector used via custom MCP, but it is not a supported memory
+backend) / `Forced built-in` / `?`.
+
+**Record:** whether built-in memory can be disabled, viewed, edited and exported.
+
+### C29 Background agents, scheduled tasks and reminders (`daniel`)
+
+**Asks:** Can you create background or persistent agents that run tasks without an open
+chat, and schedule future tasks and reminders? How are they held?
+
+**Score:** `Yes` / `Partial` (e.g. reminders only, or tasks without connector access)
+/ `No` / `?`.
+
+**Record:** where they run (vendor cloud, your machine), whether they can use
+connectors and custom MCP, how results and reminders are delivered (push, email, in
+chat), limits on number/frequency, and whether they keep running when all clients are
+closed. Links to C20 for approvals during background runs.
+
+### C30 Locally hosted tool integration, e.g. Home Assistant (`daniel`, `priority: high`)
+
+Home Assistant is the **example**, standing for any locally hosted tool on a home
+network. The criterion is about how the platform handles local tools natively, not about
+Home Assistant specifically.
+
+**Asks:** How would the platform reach and control a locally hosted tool like Home
+Assistant natively?
+
+**Score:**
+- `Native`: an official connector or integration that reaches the local tool, without
+  exposing it publicly.
+- `Via tunnel`: works through the platform's own tunnel/bridge (see C24).
+- `DIY`: only by exposing the tool's MCP/API publicly yourself and adding it as a
+  custom connector.
+- `No` / `?`
+
+**Record:** the concrete Home Assistant route (official connector, HA's MCP server
+integration, a desktop app reaching the LAN), which clients it works from (mobile often
+cannot reach local tools), and user reports.
+
+### C31 Distributed deployments / satellites (`daniel`)
+
+**Asks:** Is there built-in support for a network of deployments, e.g. the main app
+here plus a CLI installed on a local server that acts as a subagent or satellite the
+main app can delegate to?
+
+**Score:** `Native` (official pairing of instances; main app can dispatch tasks to a
+remote CLI/agent) / `Partial` (e.g. remote control of one CLI session, no delegation)
+/ `DIY` (only by wrapping the CLI as an MCP server yourself) / `No` / `?`.
+
+**Record:** how instances are paired and authenticated, whether the satellite can use
+its local tools/files on behalf of the main app, and whether this works from mobile.

@@ -38,6 +38,13 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | C22 | Project boundaries and where project data lives | normal | ? | | |
 | C23 | Custom MCP connections | high | ? | | |
 | C24 | Tunnels to own infrastructure / AI gateway | high | ? | | |
+| C25 | Purpose-built for integrations | top | ? | | |
+| C26 | Output routing to own storage | normal | ? | | |
+| C27 | Backup / export API | normal | ? | | |
+| C28 | Bring your own memory | normal | ? | | |
+| C29 | Background agents, scheduled tasks and reminders | normal | ? | | |
+| C30 | Locally hosted tool integration, e.g. Home Assistant | high | ? | | |
+| C31 | Distributed deployments / satellites | normal | ? | | |
 
 ### Verdict
 
