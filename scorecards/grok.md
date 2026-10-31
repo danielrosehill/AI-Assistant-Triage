@@ -17,11 +17,15 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | | **A. Connector ecosystem** | | | | | |
 | C25 | Purpose-built for integrations | top | ? | | | |
 | C01 | Connector catalogue size | normal | ? | | | |
+| C40 | Official connector directory: URLs | normal | Human only | grok.com/connectors is the in-app catalog (HTTP 200 SPA; login need unverified); docs list built-ins and catalog. No JSON/registry endpoint found. | assumed: https://docs.x.ai/grok/connectors | Agent (Claude Sonnet 5.5) |
 | C23 | Custom MCP connections | high | ? | | | |
+| C41 | Native private connectors | normal | Partial | Custom MCP connector by URL. Consumer/individual: grok.com/connectors > New Connector > Custom, public-internet URL (tunnel needed for local), tools auto-discovered, 'any required authentication' (methods unnamed). Business/Enterprise: admin with Team Read-Write adds via cloud console Grok Business > Connectors > + Add Connector > Other > MCP URL. No vendor review. No org-private catalogue or draft/unlisted app concept; just a per-team MCP URL. Doc does not say who sees personal custom connectors. | confirmed: https://docs.x.ai/grok/connectors | Agent (Claude Sonnet 5.5) |
+| C42 | Plugin authorship and listing | normal | ? | Neither docs.x.ai connectors page nor connector-management page mentions a directory submission process or partner programme. Built-in catalogue appears vendor-curated, but no statement found either way, so not scored Closed. | assumed: https://docs.x.ai/grok/connectors | Agent (Claude Sonnet 5.5) |
 | C32 | Progressive tool discovery and tool limits | normal | ? | | | |
 | C33 | Plugin packaging format | normal | ? | | | |
 | C34 | Custom marketplaces | normal | ? | | | |
-| C02 | Connector access by subscription tier | normal | ? | | | |
+| C02 | Connector access by subscription tier | normal | Free | Docs: 'Connectors are available to all Grok users'; Business/Enterprise admin must provision a connector in the cloud console first. Custom MCP also listed for all (public URL required). x.ai/pricing Free tier lists limited chat/agent requests. Gmail write/send enabled progressively by org admins. | confirmed: https://docs.x.ai/grok/connectors | Agent (Claude Sonnet 5.5) |
+| C39 | Subscription pricing and restrictions | normal | Free $0/mo (single account); Business $30/user/mo for admin-enabled write scopes | Gmail/Calendar/Drive RW exists but write scopes are admin-enabled; no multi-account and no Contacts on any tier. Prices from x.ai/pricing shown with $ and no explicit currency (a combined X + Grok plan page, fetched via exa proxy, egress unknown, so USD assumed). SuperGrok/Heavy ($30/$300) appear only in secondary sources; not on the page read. | confirmed: https://x.ai/pricing | Agent (Claude Sonnet 5.5) |
 | | **B. Google Workspace** | | | | | |
 | C03 | Google Workspace integration | high | Yes | Native built-in OAuth connectors (Gmail & Calendar; Google Drive), plus catalog and custom MCP (public URL). Personal vs Workspace not stated. | confirmed: https://docs.x.ai/grok/connectors | Agent (Claude Sonnet 5.5) |
 | C04 | Google Drive access level | high | Read-write | News post: 'Grok can read and write emails, documents, spreadsheets, and events'. Dedicated Drive docs page 404'd, scopes unverified. | confirmed: https://x.ai/news/grok-connectors | Agent (Claude Sonnet 5.5) |
@@ -38,6 +42,7 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | C19 | Connector invocation mode | normal | ? | | | |
 | C20 | Human-in-the-loop controls | normal | ? | | | |
 | C36 | Autonomy modes and permission structure | normal | ? | | | |
+| C43 | Team federation of plugin access | normal | Coarse | Admin adds connector once in cloud console (Grok Business > Connectors); members then connect their own accounts at grok.com/connectors (per-user auth, inferred). 'Configure' offers access controls/allowed sites, undescribed. Page says nothing on per-group scoping, SSO/SCIM, shared credentials. Applies to Business and Enterprise. Scored Coarse on absence of documented group scoping; could be revised. | confirmed: https://docs.x.ai/grok/connector-management | Agent (Claude Sonnet 5.5) |
 | | **E. Own infrastructure and local tools** | | | | | |
 | C31 | Distributed deployments / satellites | top | ? | | | |
 | C24 | Tunnels to own infrastructure / AI gateway | high | ? | | | |
@@ -60,6 +65,23 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | C16 | Cross-device conversation history sync | normal | ? | | | |
 | C17 | Native speech-to-text, desktop | normal | ? | | | |
 | C18 | Native speech-to-text, Android | normal | ? | | | |
+
+### Pricing and directory detail (C39, C40), read 2026-10-31
+
+| Tier | Price | Currency | Period | Limits | Connectors |
+|---|---|---|---|---|---|
+| Free | 0 | $ (USD assumed) | month | Limited chat and agent requests | All connectors incl. custom MCP per docs |
+| Plus | 8 | $ | month | Shared AI usage pool, Grok API access, Cursor | Same |
+| Premium | 30 | $ | month | 4x Plus usage; cloud agents and automations | Same |
+| Super | 100 | $ | month | 15x Plus; priority at peak | Same |
+| Ultra | 200 | $ | month | 50x Plus; allowance refreshes weekly; top-ups available | Same |
+| Business | 30 | $ per user | month | Increased rate limits, SSO, RBAC; seat minimum not stated | Admin must provision connectors; Gmail write/send enabled by admin |
+| Enterprise | custom | n/a | n/a | SCIM, CMEK, dedicated data plane | As Business |
+
+Prices as shown or documented on the date read; no US egress, so region may differ. Researched by Agent (Claude Sonnet 5.5).
+
+- Directory (human): https://grok.com/connectors
+- Directory (programmatic): None (auth: No official JSON found; docs https://docs.x.ai/grok/connectors)
 
 ### Verdict
 

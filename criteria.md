@@ -71,10 +71,10 @@ listed most important first. Category letters (A-H) are also used in the README 
 and scorecards. When adding a criterion, give it the next free C number and place it
 in a category.
 
-- **A. Connector ecosystem**: C25, C01, C23, C32, C33, C34, C02
+- **A. Connector ecosystem**: C25, C01, C40, C23, C41, C42, C32, C33, C34, C02, C39
 - **B. Google Workspace**: C03, C04, C05, C06, C07, C12
 - **C. Multiple accounts per connector**: C08, C09, C10, C11
-- **D. Connector usage and control**: C19, C20, C36
+- **D. Connector usage and control**: C19, C20, C36, C43
 - **E. Own infrastructure and local tools**: C31, C24, C30
 - **F. Data ownership**: C26, C27, C28
 - **G. Agents, projects and coding**: C35, C29, C22, C21, C37, C38
@@ -117,6 +117,20 @@ vendor is investing in the ecosystem.
 **Score:** this is a count, not Yes/No. Record the number; banding is
 `Large` (100+), `Medium` (20-99), `Small` (1-19), `None` (0). Bands are provisional.
 
+### C40 Official connector directory: URLs (`general`)
+
+_Added 2026-10-31. Companion to C01._
+
+**Asks:** Does the vendor publish its connector/plugin library at an official URL a
+human can browse, and a programmatic list (JSON or an API/registry endpoint) an agent
+can read?
+
+**Score:** `Both` / `Human only` / `JSON only` / `In-app only` (no public URL) / `None` / `?`.
+
+**Record:** both URLs, whether the JSON needs auth, what fields it carries (name,
+description, auth type, MCP URL), and whether it is official or a community mirror
+(community mirrors are noted but do not count).
+
 ### C23 Custom MCP connections (`daniel`, `priority: high`)
 
 **Asks:** Can the user add their own MCP server, not just pick from the catalogue?
@@ -128,6 +142,36 @@ vendor is investing in the ecosystem.
 HTTP, SSE); auth supported (OAuth, bearer/API-key header, none); which tiers; which
 clients (web, desktop, mobile: a server added on web may not work on Android); whether
 an admin must approve it on business plans; any limits on tools per server.
+
+### C41 Native private connectors (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** Is there native support for private connectors: ones you or your org build
+and use without publishing them to the public directory? How is it done?
+
+**Score:** `Yes` (first-class private connectors, e.g. org-private directory entries or
+unlisted apps, available to the people you choose) / `Partial` (only as a per-user
+custom MCP URL, or only on business plans) / `No` / `?`.
+
+**Record:** the mechanism (custom MCP URL, unlisted/draft app, org-private catalogue,
+developer mode), who can create and who can see it, which tiers, auth options, and
+whether it needs vendor review.
+
+### C42 Plugin authorship and listing (`general`)
+
+_Added 2026-10-31._
+
+**Asks:** How does a third party get a connector/plugin listed in the official
+directory?
+
+**Score:** `Open submission` (anyone can submit; review then listing) / `Partner only`
+(application, partnership or approved developers only) / `Closed` (vendor-built only)
+/ `?`.
+
+**Record:** the submission URL, requirements (MCP server, manifest, privacy policy,
+security review, verified domain/business), typical review time if stated, fees or
+revenue share, and whether individuals can publish or only companies.
 
 ### C32 Progressive tool discovery and tool limits (`daniel`)
 
@@ -196,6 +240,23 @@ the real cost of using the platform agentically is much higher than its entry pr
 **Record:** which tiers get what, the cheapest tier with connector access and its
 monthly price (note currency and region; no US egress from this machine), and whether
 custom connectors are gated differently from catalogue ones.
+
+### C39 Subscription pricing and restrictions (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** What does each consumer and business tier cost, and what usage restrictions
+apply that affect agentic use (message/credit caps, connector or account caps, tool-call
+or task limits, seat minimums, annual-only billing)?
+
+**Score:** the cheapest tier that gets the connector features Daniel needs (C03-C12 at
+their best level for that tool), with its monthly price, e.g. `Plus $20/mo`. `?` if
+not found.
+
+**Record:** every tier with price, currency and billing period as shown (note the
+region/currency the page displayed; no US egress from this machine, so don't assume US
+prices), what each tier unlocks for connectors, and the documented restrictions. Price
+pages change often: always link the pricing page and the date read.
 
 ## B. Google Workspace
 
@@ -358,6 +419,23 @@ between; or rules without modes) / `Supervised only` / `Autonomous only` / `?`.
 expressed (per tool, per command pattern, per path, per connector), where they are
 stored (user, project, admin-managed policy) and which layer wins, whether mode can be
 switched mid-session, and whether chat app and CLI share the same model.
+
+### C43 Team federation of plugin access (`daniel`)
+
+_Added 2026-10-31._
+
+**Asks:** On team/business plans, how is connector and plugin access federated:
+can an admin add connectors once for the whole org, allowlist or block them, scope
+them to groups, and decide whether each user authenticates individually or shares an
+org credential?
+
+**Score:** `Granular` (admin catalogue plus per-group/role scoping and allow/block
+lists) / `Coarse` (org-wide on/off or allowlist only) / `None` (each user on their
+own) / `N/A` (no team plan) / `?`.
+
+**Record:** where admins manage it, whether SSO/SCIM groups drive access, per-user vs
+shared (service) credentials, whether custom/private connectors can be pushed to all
+members, audit logging, and which tier is needed.
 
 ## E. Own infrastructure and local tools
 

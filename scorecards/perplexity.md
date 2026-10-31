@@ -17,11 +17,15 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | | **A. Connector ecosystem** | | | | | |
 | C25 | Purpose-built for integrations | top | ? | | | |
 | C01 | Connector catalogue size | normal | ? | | | |
+| C40 | Official connector directory: URLs | normal | In-app only | No public directory or JSON found. Help Center collection of 26 per-connector articles (not a catalogue); Connectors tab inside Computer is the in-product list. Agent API docs: no list endpoint, connector IDs copied from console Project connectors page; API key Bearer auth for use. | confirmed: https://www.perplexity.ai/help-center/en/collections/18799295-connectors-integrations | Agent (Claude Sonnet 5.5) |
 | C23 | Custom MCP connections | high | ? | | | |
+| C41 | Native private connectors | normal | Yes | Custom remote connectors (Streamable HTTP MCP URL). Individual scope = private to creator; Organization scope = shared with all members (admins only; starts off). Auth: none, API key, OAuth 2.0 (manual client id/secret if no DCR); Cloudflare Access service token supported. Enterprise members need admin toggle 'Allow members to add custom connectors' (off by default). Plans: help article lists none; third parties say Pro/Max/Enterprise (assumed). No vendor review. | confirmed: https://www.perplexity.ai/help-center/en/articles/13915507-adding-custom-remote-connectors | Agent (Claude Sonnet 5.5) |
+| C42 | Plugin authorship and listing | normal | ? | Article links to 'Submit a Connector Proposal' but that page was not found/read; no submission URL or requirements confirmed. Likely proposal-based (possibly Partner only). | assumed: https://www.perplexity.ai/help-center/en/articles/13915507-adding-custom-remote-connectors | Agent (Claude Sonnet 5.5) |
 | C32 | Progressive tool discovery and tool limits | normal | ? | | | |
 | C33 | Plugin packaging format | normal | ? | | | |
 | C34 | Custom marketplaces | normal | ? | | | |
-| C02 | Connector access by subscription tier | normal | ? | | | |
+| C02 | Connector access by subscription tier | normal | Tiered | Custom MCP connectors: Pro, Max, Enterprise (changelog quote). File app connectors: Pro (Free not stated). Pricing table lists '400+ app connectors' but cell-to-tier mapping unreadable; Snowflake article says Pro/Max/Ent Pro/Ent Max; Linear/GitHub are enterprise-slugged; org admins can disable connectors. Free-tier connector access not confirmed. Cheapest connector tier: Pro $17/mo billed annually ($ shown, currency not named). | assumed: https://www.perplexity.ai/changelog/what-we-shipped---march-13-2026 | Agent (Claude Sonnet 5.5) |
+| C39 | Subscription pricing and restrictions | normal | Pro $17/mo billed annually (page shows '$', unnamed currency; third-party says $20 monthly) | Cheapest tier assumed sufficient for Gmail (read; send needs Comet) + Calendar (create/update needs Comet) + Drive read-only + custom MCP; no multi-account anyway (C08 No). Max $167/mo annual adds higher limits/10,000 monthly credits. Comet is free to download (third-party). Enterprise price not listed on page (demo-gated); third-party: Ent Pro ~$40/seat/mo, Ent Max ~$325/seat/mo, unverified. Local MCP: Mac app only, tier not stated. | confirmed: https://www.perplexity.ai/hub/pricing | Agent (Claude Sonnet 5.5) |
 | | **B. Google Workspace** | | | | | |
 | C03 | Google Workspace integration | high | Yes | Native connectors: Gmail with Calendar, Google Drive; Gmail covers Gmail and Google Workspace Mail. | confirmed: https://www.perplexity.ai/help-center/en/articles/12168040-connecting-perplexity-with-gmail-and-google-calendar | Agent (Claude Sonnet 5.5) |
 | C04 | Google Drive access level | high | Read-only | Native. Searches/syncs Docs, Sheets, Slides, Office, PDF, CSV, MD, JSON, TXT; states it does not modify Drive file content. Pro and up. Workspace not distinct; admin OAuth may block. | confirmed: https://www.perplexity.ai/help-center/en/articles/12870620-connecting-perplexity-with-google-drive | Agent (Claude Sonnet 5.5) |
@@ -38,6 +42,7 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | C19 | Connector invocation mode | normal | ? | | | |
 | C20 | Human-in-the-loop controls | normal | ? | | | |
 | C36 | Autonomy modes and permission structure | normal | ? | | | |
+| C43 | Team federation of plugin access | normal | Granular | Admin: Organization settings > Connectors (some builds: Enterprise settings > Permissions > Connector permissions). Per-connector Enabled toggle + role list (All Members, Admin, custom roles); 'Manage connector defaults' permission; 'New connectors' default can be Disabled. SCIM/IdP groups flow into roles. OAuth: admin can authenticate once org-wide or require per-member auth. Custom/remote org connectors pushable to all members. Audit logs for enable/disable/role changes. Roles grant only; no deny. RBAC on sales-assisted Enterprise; plugins rolling out first to Self-Serve Enterprise. | confirmed: https://www.perplexity.ai/help-center/en/articles/2026100201-role-based-access-control-for-connectors | Agent (Claude Sonnet 5.5) |
 | | **E. Own infrastructure and local tools** | | | | | |
 | C31 | Distributed deployments / satellites | top | ? | | | |
 | C24 | Tunnels to own infrastructure / AI gateway | high | ? | | | |
@@ -60,6 +65,21 @@ Newest evaluation goes at the top. Do not edit an old evaluation; add a new date
 | C16 | Cross-device conversation history sync | normal | ? | | | |
 | C17 | Native speech-to-text, desktop | normal | ? | | | |
 | C18 | Native speech-to-text, Android | normal | ? | | | |
+
+### Pricing and directory detail (C39, C40), read 2026-10-31
+
+| Tier | Price | Currency | Period | Limits | Connectors |
+|---|---|---|---|---|---|
+| Free | 0 | $ (unnamed) | month | limited daily usage, basic models | not stated |
+| Pro | 17 | $ (unnamed) | month, billed annually | higher limits, 4,000 bonus credits; file sync not available on Pro; connectors work in sessions not Projects; files over 40MB excluded | 400+ app connectors, file connectors, custom MCP; Gmail/Calendar write via Comet |
+| Max | 167 | $ (unnamed) | month, billed annually | 10,000 monthly credits, 35,000 bonus, highest limits | same as Pro, plus custom MCP |
+| Enterprise Pro | not listed (third-party ~40/seat) | ? | month/seat | sales-led; seat minimum unknown | admin-controlled, RBAC for connectors, enterprise connectors (GitHub, Linear) |
+| Enterprise Max | not listed (third-party ~325/seat) | ? | month/seat | sales-led | as Ent Pro, Comet Max Assistant (third-party) |
+
+Prices as shown or documented on the date read; no US egress, so region may differ. Researched by Agent (Claude Sonnet 5.5).
+
+- Directory (human): None
+- Directory (programmatic): None (auth: n/a (none found); help center: https://www.perplexity.ai/help-center/en/collections/18799295-connectors-integrations)
 
 ### Verdict
 

@@ -441,7 +441,7 @@
       "K01_authorship": "Third-party",
       "K02_model_access": "Vendor-managed (multi-model)",
       "K03_deployment": "SaaS",
-      "status": "watchlist",
+      "status": "scorecard",
       "connectors": "1,500+ integrations; Gmail, Google Calendar, Outlook; Drive listed by directories; reachable via web chat, Slack, iMessage/SMS, email, Chrome extension",
       "mcp": "remote (docs: 'Lindy supports MCP, any MCP server your team runs plugs straight in')",
       "source": "https://docs.lindy.ai/account-billing/multi-account",
@@ -452,7 +452,8 @@
       "recommend": "strong",
       "recommend_why": "Only candidate found with documented multi-account Google, per-tier inbox limits, custom MCP and write guardrails.",
       "added": "2026-10-31",
-      "added_by": "Agent (Claude Sonnet 5.5)"
+      "added_by": "Agent (Claude Sonnet 5.5)",
+      "scorecard": "scorecards/lindy.md"
     },
     {
       "name": "Relevance AI (Invent / agents)",
