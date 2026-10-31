@@ -35,7 +35,10 @@ must carry:
 - the plan/tier evaluated (free, Plus, Team, Enterprise...), since connector features
   are often tier-gated,
 - for each feature: whether it was **confirmed** (tested, or read in current vendor
-  docs, with a source link) or **assumed** (secondhand, older article, inferred).
+  docs, with a source link) or **assumed** (secondhand, older article, inferred),
+- for each feature: **who** scored it (`By` column: `Daniel` or `Agent (<model>)`).
+  Daniel's observations win over agent research; flag contradictions in the note.
+  README matrix cells scored by Daniel carry `(D)`. Rules: `criteria.md`, "Attribution".
 
 Never update an old scorecard in place to reflect a new state; add a new dated
 evaluation so the history is kept.

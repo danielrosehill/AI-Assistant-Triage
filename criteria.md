@@ -21,6 +21,19 @@ Each criterion is scored per tool as:
 
 Every score also carries a one-line implementation note. Every non-`?` score carries a source link or "observed by Daniel, YYYY-MM-DD".
 
+### Attribution (who scored it)
+
+_Added 2026-10-31._ Every non-`?` score records who made it, in the scorecard's `By` column:
+
+- `Daniel`: Daniel's own observation or call. The note is his, kept in his words where
+  possible. Counts as confirmed.
+- `Agent (<model>)`: researched by an AI agent, e.g. `Agent (Claude Opus 5.5)`. The
+  source column says whether the vendor page was read (`confirmed`) or not (`assumed`).
+
+Where both exist for one criterion, Daniel's score wins and the agent's finding goes in
+the note (flag any contradiction rather than silently overriding). In the README matrix,
+a cell scored by Daniel is suffixed `(D)`; unsuffixed cells are agent-researched.
+
 ## Classification (K01-K03)
 
 Not scored. These describe what kind of tool it is, so tools are compared within
@@ -543,14 +556,22 @@ Priority: normal (no weighting given, 2026-10-31).
 For C13-C15, score `Yes` only for an **official** vendor client. A community or
 unofficial client scores `No`, with it named in the note (e.g. `No (community: AppImage
 wrapper)`), since it may lag features or break. A PWA / "install the website" counts as
-`No` with `PWA` noted, unless the vendor ships it as its official app for that platform.
+`No` with `PWA` noted for C14-C15, unless the vendor ships it as its official app for
+that platform. C13 (Linux desktop) is the exception: a PWA is acceptable there (Daniel,
+2026-10-31), but the score must say which it is.
 
 **Type** = how it is distributed. Record every channel offered.
 
 ### C13 Linux desktop app (`daniel`)
 
-**Score:** `Yes` / `No`, plus type: `deb`, `rpm`, `AppImage`, `Flatpak`, `Snap`, `AUR`,
-`tarball`, `PWA`.
+**Score:** `Yes (native)` / `Yes (PWA)` / `No`. A PWA is acceptable here (Daniel,
+2026-10-31) but must always be labelled as such, never as plain `Yes`. A tool with both
+scores `Yes (native)` and notes the PWA too.
+
+**Type** (native): `deb`, `rpm`, `AppImage`, `Flatpak`, `Snap`, `AUR`, `tarball`.
+For `Yes (PWA)`, note how it installs (Chrome/Edge "Install app", vendor-provided
+manifest) and anything it loses versus a native app (e.g. global hotkey, local MCP,
+desktop dictation).
 
 ### C14 Linux CLI (`daniel`)
 

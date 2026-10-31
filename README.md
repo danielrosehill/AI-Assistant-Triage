@@ -46,15 +46,15 @@ See [`criteria.md`](criteria.md).
 
 ## Summary
 
-Classification rows (K) come first, then criteria (C). Criteria are rows and tools are columns, so adding a tool adds a column. `?` = not yet verified.
+Classification rows (K) come first, then criteria (C). Criteria are rows and tools are columns, so adding a tool adds a column. `?` = not yet verified. `(D)` = scored by Daniel; unmarked cells are agent-researched (see `By` in each scorecard; many are `assumed`, not confirmed).
 
 | ID | Criterion | Priority | [ChatGPT](scorecards/chatgpt.md) | [Claude](scorecards/claude.md) | [Grok](scorecards/grok.md) | [Gemini](scorecards/gemini.md) | [Le Chat](scorecards/le-chat.md) | [Perplexity](scorecards/perplexity.md) | [Copilot](scorecards/copilot.md) |
 |----|-----------|----------|---|---|---|---|---|---|---|
 | K01 | Authorship | | Vendor | Vendor | Vendor | Vendor | Vendor | Third-party | Third-party |
 | K02 | Model access | | Subscription | Subscription | Subscription | Subscription | Subscription | Subscription | Subscription |
 | K03 | Deployment | | SaaS | SaaS | SaaS | SaaS | SaaS | SaaS | SaaS |
-| | **Evaluated** | | not yet | not yet | not yet | not yet | not yet | not yet | not yet |
-| | **Tier evaluated** | | | | | | | | |
+| | **Evaluated** | | 2026-10-31 (B, C only) | 2026-10-31 (B, C only) | 2026-10-31 (B, C only) | 2026-10-31 (B, C only) | 2026-10-31 (B, C only) | 2026-10-31 (B, C only) | 2026-10-31 (B, C only) |
+| | **Tier evaluated** | | Plus | Free | all users | not stated | not stated | Pro | Free (assumed) |
 | | **A. Connector ecosystem** | | | | | | | | |
 | C25 | Purpose-built for integrations | top | ? | ? | ? | ? | ? | ? | ? |
 | C01 | Connector catalogue size | normal | ? | ? | ? | ? | ? | ? | ? |
@@ -64,17 +64,17 @@ Classification rows (K) come first, then criteria (C). Criteria are rows and too
 | C34 | Custom marketplaces | normal | ? | ? | ? | ? | ? | ? | ? |
 | C02 | Connector access by subscription tier | normal | ? | ? | ? | ? | ? | ? | ? |
 | | **B. Google Workspace** | | | | | | | | |
-| C03 | Google Workspace integration | high | ? | ? | ? | ? | ? | ? | ? |
-| C04 | Google Drive access level | high | ? | ? | ? | ? | ? | ? | ? |
-| C05 | Gmail access level | high | ? | ? | ? | ? | ? | ? | ? |
-| C06 | Gmail attachments | high | ? | ? | ? | ? | ? | ? | ? |
-| C07 | Google Contacts access level | high | ? | ? | ? | ? | ? | ? | ? |
-| C12 | Google Calendar access level | high | ? | ? | ? | ? | ? | ? | ? |
+| C03 | Google Workspace integration | high | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| C04 | Google Drive access level | high | Read-write | Read-write | Read-write | Read-only | Read-only | Read-only | Read-only |
+| C05 | Gmail access level | high | Read-write | Read-write | Read-write | Read-only | Read-write | Read-write | Read-only |
+| C06 | Gmail attachments | high | ? | None | Read only | ? | ? | ? | ? |
+| C07 | Google Contacts access level | high | Read-only | None | None | Read-write | None | ? | Read-only |
+| C12 | Google Calendar access level | high | Read-write | Read-write | Read-write | Read-write | Read-write | Read-write | Read-only |
 | | **C. Multiple accounts per connector** | | | | | | | | |
-| C08 | Multiple accounts per connector | top | ? | ? | ? | ? | ? | ? | ? |
-| C09 | Profile naming / aliases | top | ? | ? | ? | ? | ? | ? | ? |
-| C10 | Profile limit per connector | top | ? | ? | ? | ? | ? | ? | ? |
-| C11 | Profile selection handling | top | ? | ? | ? | ? | ? | ? | ? |
+| C08 | Multiple accounts per connector | top | Yes (D) | No | No (D) | No | ? | No | ? |
+| C09 | Profile naming / aliases | top | Yes (D) | No | N/A | No | ? | No | No |
+| C10 | Profile limit per connector | top | ? | 1 | 1 | 1 | ? | 1 | ? |
+| C11 | Profile selection handling | top | Prompt only | N/A | N/A | N/A | ? | N/A | ? |
 | | **D. Connector usage and control** | | | | | | | | |
 | C19 | Connector invocation mode | normal | ? | ? | ? | ? | ? | ? | ? |
 | C20 | Human-in-the-loop controls | normal | ? | ? | ? | ? | ? | ? | ? |
