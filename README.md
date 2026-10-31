@@ -22,7 +22,21 @@ not a current verdict.
 
 ## Candidates
 
-Initial list (2026-10-31): ChatGPT, Claude (the official Claude apps), Grok.
+Grouped by classification (K01-K03 in [`criteria.md`](criteria.md)). Compare tools within a bucket.
+
+**SaaS / Vendor** (vendor builds the app and the models), with scorecards:
+ChatGPT, Claude (official Claude apps), Grok, Gemini, Le Chat.
+
+**SaaS / Third-party**, with scorecards: Perplexity, Microsoft Copilot (consumer).
+
+**Watchlist** (no scorecard yet; candidates found 2026-10-31, mostly from third-party
+blogs, unverified):
+
+- SaaS / Third-party: Manus, Genspark (agent-first); Poe, Abacus ChatLLM, T3 Chat
+  (multi-model aggregators); Qwen Chat, Kimi (vendor apps with some MCP; would move to
+  SaaS / Vendor if scored); Meta AI (few connectors).
+- Self-hosted or self-deployed (BYOK): LibreChat, Open WebUI, LobeChat, AnythingLLM.
+- Desktop (BYOK): Cherry Studio, Msty, Jan, Chatbox.
 
 ## Criteria
 
@@ -30,36 +44,39 @@ See [`criteria.md`](criteria.md).
 
 ## Summary
 
-Criteria are rows and tools are columns, so adding a tool adds a column. `?` = not yet verified.
+Classification rows (K) come first, then criteria (C). Criteria are rows and tools are columns, so adding a tool adds a column. `?` = not yet verified.
 
-| ID | Criterion | Priority | [ChatGPT](scorecards/chatgpt.md) | [Claude](scorecards/claude.md) | [Grok](scorecards/grok.md) |
-|----|-----------|----------|---|---|---|
-| | **Evaluated** | | not yet | not yet | not yet |
-| | **Tier evaluated** | | | | |
-| C01 | Connector catalogue size | normal | ? | ? | ? |
-| C02 | Connector access by subscription tier | normal | ? | ? | ? |
-| C03 | Google Workspace integration | high | ? | ? | ? |
-| C04 | Google Drive access level | high | ? | ? | ? |
-| C05 | Gmail access level | high | ? | ? | ? |
-| C06 | Gmail attachments | high | ? | ? | ? |
-| C07 | Google Contacts access level | high | ? | ? | ? |
-| C08 | Multiple accounts per connector | top | ? | ? | ? |
-| C09 | Profile naming / aliases | top | ? | ? | ? |
-| C10 | Profile limit per connector | top | ? | ? | ? |
-| C11 | Profile selection handling | top | ? | ? | ? |
-| C12 | Google Calendar access level | high | ? | ? | ? |
-| C13 | Linux desktop app | normal | ? | ? | ? |
-| C14 | Linux CLI | normal | ? | ? | ? |
-| C15 | Android app | normal | ? | ? | ? |
-| C16 | Cross-device conversation history sync | normal | ? | ? | ? |
-| C17 | Native speech-to-text, desktop | normal | ? | ? | ? |
-| C18 | Native speech-to-text, Android | normal | ? | ? | ? |
-| C19 | Connector invocation mode | normal | ? | ? | ? |
-| C20 | Human-in-the-loop controls | normal | ? | ? | ? |
-| C21 | Parallel CLI coding product | normal | ? | ? | ? |
-| C22 | Project boundaries and where project data lives | normal | ? | ? | ? |
-| C23 | Custom MCP connections | high | ? | ? | ? |
-| C24 | Tunnels to own infrastructure / AI gateway | high | ? | ? | ? |
-| | **Verdict** | | | | |
+| ID | Criterion | Priority | [ChatGPT](scorecards/chatgpt.md) | [Claude](scorecards/claude.md) | [Grok](scorecards/grok.md) | [Gemini](scorecards/gemini.md) | [Le Chat](scorecards/le-chat.md) | [Perplexity](scorecards/perplexity.md) | [Copilot](scorecards/copilot.md) |
+|----|-----------|----------|---|---|---|---|---|---|---|
+| K01 | Authorship | | Vendor | Vendor | Vendor | Vendor | Vendor | Third-party | Third-party |
+| K02 | Model access | | Subscription | Subscription | Subscription | Subscription | Subscription | Subscription | Subscription |
+| K03 | Deployment | | SaaS | SaaS | SaaS | SaaS | SaaS | SaaS | SaaS |
+| | **Evaluated** | | not yet | not yet | not yet | not yet | not yet | not yet | not yet |
+| | **Tier evaluated** | | | | | | | | |
+| C01 | Connector catalogue size | normal | ? | ? | ? | ? | ? | ? | ? |
+| C02 | Connector access by subscription tier | normal | ? | ? | ? | ? | ? | ? | ? |
+| C03 | Google Workspace integration | high | ? | ? | ? | ? | ? | ? | ? |
+| C04 | Google Drive access level | high | ? | ? | ? | ? | ? | ? | ? |
+| C05 | Gmail access level | high | ? | ? | ? | ? | ? | ? | ? |
+| C06 | Gmail attachments | high | ? | ? | ? | ? | ? | ? | ? |
+| C07 | Google Contacts access level | high | ? | ? | ? | ? | ? | ? | ? |
+| C08 | Multiple accounts per connector | top | ? | ? | ? | ? | ? | ? | ? |
+| C09 | Profile naming / aliases | top | ? | ? | ? | ? | ? | ? | ? |
+| C10 | Profile limit per connector | top | ? | ? | ? | ? | ? | ? | ? |
+| C11 | Profile selection handling | top | ? | ? | ? | ? | ? | ? | ? |
+| C12 | Google Calendar access level | high | ? | ? | ? | ? | ? | ? | ? |
+| C13 | Linux desktop app | normal | ? | ? | ? | ? | ? | ? | ? |
+| C14 | Linux CLI | normal | ? | ? | ? | ? | ? | ? | ? |
+| C15 | Android app | normal | ? | ? | ? | ? | ? | ? | ? |
+| C16 | Cross-device conversation history sync | normal | ? | ? | ? | ? | ? | ? | ? |
+| C17 | Native speech-to-text, desktop | normal | ? | ? | ? | ? | ? | ? | ? |
+| C18 | Native speech-to-text, Android | normal | ? | ? | ? | ? | ? | ? | ? |
+| C19 | Connector invocation mode | normal | ? | ? | ? | ? | ? | ? | ? |
+| C20 | Human-in-the-loop controls | normal | ? | ? | ? | ? | ? | ? | ? |
+| C21 | Parallel CLI coding product | normal | ? | ? | ? | ? | ? | ? | ? |
+| C22 | Project boundaries and where project data lives | normal | ? | ? | ? | ? | ? | ? | ? |
+| C23 | Custom MCP connections | high | ? | ? | ? | ? | ? | ? | ? |
+| C24 | Tunnels to own infrastructure / AI gateway | high | ? | ? | ? | ? | ? | ? | ? |
+| | **Verdict** | | | | | | | | |
 
 Per-tool detail: [`scorecards/`](scorecards/).

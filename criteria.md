@@ -16,8 +16,40 @@ Each criterion is scored per tool as:
 - `Partial`: present with notable limits (tier-gated, beta, read-only, desktop-only...)
 - `No`: confirmed absent
 - `?`: not yet verified
+- `N/A`: the criterion does not apply to this kind of tool (e.g. subscription tiers for a
+  self-hosted BYOK app). Not the same as `No`.
 
 Every score also carries a one-line implementation note. Every non-`?` score carries a source link or "observed by Daniel, YYYY-MM-DD".
+
+## Classification (K01-K03)
+
+Not scored. These describe what kind of tool it is, so tools are compared within
+like-for-like buckets. The README groups candidates by bucket.
+
+### K01 Authorship
+
+- `Vendor`: the app is built and supported by the company that makes the main models it
+  runs (OpenAI/ChatGPT, Anthropic/Claude, xAI/Grok, Google/Gemini, Mistral/Le Chat). One
+  vendor owns the model, the app, the connectors and support.
+- `Third-party`: the app is built by someone else and runs other companies' models,
+  even if it adds some of its own (e.g. Perplexity, Microsoft Copilot, LibreChat).
+
+### K02 Model access
+
+- `Subscription`: you pay the app vendor; models are included.
+- `BYOK`: bring your own API key(s); you pay model providers directly.
+- `Both`
+
+### K03 Deployment
+
+- `SaaS`: vendor-hosted; you just sign in.
+- `Self-deployed`: you deploy the vendor's software into infrastructure you rent or
+  control (e.g. a cloud VM, one-click Railway/Vercel/Docker template).
+- `Self-hosted`: runs on your own hardware (home server, NAS).
+- `Desktop`: a local app on your machine, no server.
+
+Buckets used in the README: **SaaS / Vendor**, **SaaS / Third-party**,
+**Self-hosted or self-deployed (BYOK)**, **Desktop (BYOK)**.
 
 ## Criteria
 
