@@ -48,7 +48,7 @@ unless re-evaluated (and re-dated).
 
 ## Layout
 
-- `criteria.md`: the feature checklist and scoring scheme.
+- `criteria.md`: classification (K01-K03) and the feature checklist, grouped into categories A-H. C numbers are stable IDs; new criteria take the next free number and go into a category.
 - `scorecards/<tool-slug>.md`: one file per tool, newest evaluation at the top.
 - `README.md`: purpose, scope, candidates, and the summary matrix (criteria as rows, tools as columns).
 - When a criterion is added to `criteria.md`, add its row to the README matrix and to every scorecard table.

@@ -53,37 +53,45 @@ Classification rows (K) come first, then criteria (C). Criteria are rows and too
 | K03 | Deployment | | SaaS | SaaS | SaaS | SaaS | SaaS | SaaS | SaaS |
 | | **Evaluated** | | not yet | not yet | not yet | not yet | not yet | not yet | not yet |
 | | **Tier evaluated** | | | | | | | | |
+| | **A. Connector ecosystem** | | | | | | | | |
+| C25 | Purpose-built for integrations | top | ? | ? | ? | ? | ? | ? | ? |
 | C01 | Connector catalogue size | normal | ? | ? | ? | ? | ? | ? | ? |
+| C23 | Custom MCP connections | high | ? | ? | ? | ? | ? | ? | ? |
 | C02 | Connector access by subscription tier | normal | ? | ? | ? | ? | ? | ? | ? |
+| | **B. Google Workspace** | | | | | | | | |
 | C03 | Google Workspace integration | high | ? | ? | ? | ? | ? | ? | ? |
 | C04 | Google Drive access level | high | ? | ? | ? | ? | ? | ? | ? |
 | C05 | Gmail access level | high | ? | ? | ? | ? | ? | ? | ? |
 | C06 | Gmail attachments | high | ? | ? | ? | ? | ? | ? | ? |
 | C07 | Google Contacts access level | high | ? | ? | ? | ? | ? | ? | ? |
+| C12 | Google Calendar access level | high | ? | ? | ? | ? | ? | ? | ? |
+| | **C. Multiple accounts per connector** | | | | | | | | |
 | C08 | Multiple accounts per connector | top | ? | ? | ? | ? | ? | ? | ? |
 | C09 | Profile naming / aliases | top | ? | ? | ? | ? | ? | ? | ? |
 | C10 | Profile limit per connector | top | ? | ? | ? | ? | ? | ? | ? |
 | C11 | Profile selection handling | top | ? | ? | ? | ? | ? | ? | ? |
-| C12 | Google Calendar access level | high | ? | ? | ? | ? | ? | ? | ? |
+| | **D. Connector usage and control** | | | | | | | | |
+| C19 | Connector invocation mode | normal | ? | ? | ? | ? | ? | ? | ? |
+| C20 | Human-in-the-loop controls | normal | ? | ? | ? | ? | ? | ? | ? |
+| | **E. Own infrastructure and local tools** | | | | | | | | |
+| C24 | Tunnels to own infrastructure / AI gateway | high | ? | ? | ? | ? | ? | ? | ? |
+| C30 | Locally hosted tool integration, e.g. Home Assistant | high | ? | ? | ? | ? | ? | ? | ? |
+| C31 | Distributed deployments / satellites | normal | ? | ? | ? | ? | ? | ? | ? |
+| | **F. Data ownership** | | | | | | | | |
+| C26 | Output routing to own storage | normal | ? | ? | ? | ? | ? | ? | ? |
+| C27 | Backup / export API | normal | ? | ? | ? | ? | ? | ? | ? |
+| C28 | Bring your own memory | normal | ? | ? | ? | ? | ? | ? | ? |
+| | **G. Agents, projects and coding** | | | | | | | | |
+| C29 | Background agents, scheduled tasks and reminders | normal | ? | ? | ? | ? | ? | ? | ? |
+| C22 | Project boundaries and where project data lives | normal | ? | ? | ? | ? | ? | ? | ? |
+| C21 | Parallel CLI coding product | normal | ? | ? | ? | ? | ? | ? | ? |
+| | **H. Clients and platforms** | | | | | | | | |
 | C13 | Linux desktop app | normal | ? | ? | ? | ? | ? | ? | ? |
 | C14 | Linux CLI | normal | ? | ? | ? | ? | ? | ? | ? |
 | C15 | Android app | normal | ? | ? | ? | ? | ? | ? | ? |
 | C16 | Cross-device conversation history sync | normal | ? | ? | ? | ? | ? | ? | ? |
 | C17 | Native speech-to-text, desktop | normal | ? | ? | ? | ? | ? | ? | ? |
 | C18 | Native speech-to-text, Android | normal | ? | ? | ? | ? | ? | ? | ? |
-| C19 | Connector invocation mode | normal | ? | ? | ? | ? | ? | ? | ? |
-| C20 | Human-in-the-loop controls | normal | ? | ? | ? | ? | ? | ? | ? |
-| C21 | Parallel CLI coding product | normal | ? | ? | ? | ? | ? | ? | ? |
-| C22 | Project boundaries and where project data lives | normal | ? | ? | ? | ? | ? | ? | ? |
-| C23 | Custom MCP connections | high | ? | ? | ? | ? | ? | ? | ? |
-| C24 | Tunnels to own infrastructure / AI gateway | high | ? | ? | ? | ? | ? | ? | ? |
-| C25 | Purpose-built for integrations | top | ? | ? | ? | ? | ? | ? | ? |
-| C26 | Output routing to own storage | normal | ? | ? | ? | ? | ? | ? | ? |
-| C27 | Backup / export API | normal | ? | ? | ? | ? | ? | ? | ? |
-| C28 | Bring your own memory | normal | ? | ? | ? | ? | ? | ? | ? |
-| C29 | Background agents, scheduled tasks and reminders | normal | ? | ? | ? | ? | ? | ? | ? |
-| C30 | Locally hosted tool integration, e.g. Home Assistant | high | ? | ? | ? | ? | ? | ? | ? |
-| C31 | Distributed deployments / satellites | normal | ? | ? | ? | ? | ? | ? | ? |
 | | **Verdict** | | | | | | | | |
 
 Per-tool detail: [`scorecards/`](scorecards/).
