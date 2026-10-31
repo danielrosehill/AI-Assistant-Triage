@@ -50,6 +50,7 @@ unless re-evaluated (and re-dated).
 
 - `criteria.md`: classification (K01-K03) and the feature checklist, grouped into categories A-H. C numbers are stable IDs; new criteria take the next free number and go into a category.
 - `scorecards/<tool-slug>.md`: one file per tool, newest evaluation at the top.
+- `candidates.json`: every candidate (scored and watchlist) with K01-K03, connector notes, source and evidence level, plus `excluded` (checked, no connector evidence). Update `updated` on each refresh; when a watchlist tool gets a scorecard, set `status` to `scorecard`.
 - `README.md`: purpose, scope, candidates, and the summary matrix (criteria as rows, tools as columns).
 - When a criterion is added to `criteria.md`, add its row to the README matrix and to every scorecard table.
 

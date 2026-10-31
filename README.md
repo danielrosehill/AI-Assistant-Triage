@@ -29,14 +29,16 @@ ChatGPT, Claude (official Claude apps), Grok, Gemini, Le Chat.
 
 **SaaS / Third-party**, with scorecards: Perplexity, Microsoft Copilot (consumer).
 
-**Watchlist** (no scorecard yet; candidates found 2026-10-31, mostly from third-party
-blogs, unverified):
+**Watchlist** (no scorecard yet; refreshed 2026-10-31, unverified leads). Full list with
+connector notes, MCP transport, sources and evidence level: [`candidates.json`](candidates.json).
 
-- SaaS / Third-party: Manus, Genspark (agent-first); Poe, Abacus ChatLLM, T3 Chat
-  (multi-model aggregators); Qwen Chat, Kimi (vendor apps with some MCP; would move to
-  SaaS / Vendor if scored); Meta AI (few connectors).
-- Self-hosted or self-deployed (BYOK): LibreChat, Open WebUI, LobeChat, AnythingLLM.
-- Desktop (BYOK): Cherry Studio, Msty, Jan, Chatbox.
+- SaaS / Third-party: Manus, Genspark, Abacus ChatLLM, TypingMind, Notion AI (custom MCP
+  on Business+); Poe and T3 Chat (no native MCP found).
+- SaaS / Vendor: Qwen Chat, Kimi (chat-app MCP unconfirmed); Alexa+ (developer MCP
+  add-ons, voice-first); Meta AI (no connectors found).
+- Self-hosted or self-deployed (BYOK): LibreChat, Open WebUI, LobeHub (formerly LobeChat).
+- Desktop (BYOK): AnythingLLM, Cherry Studio, Msty Studio, Jan, Chatbox, Raycast AI,
+  Witsy, 5ire, Goose (also a coding agent; scope check).
 
 ## Criteria
 
