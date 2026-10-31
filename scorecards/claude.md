@@ -1,0 +1,51 @@
+# Claude
+
+Vendor: Anthropic (official Claude apps: web, desktop, mobile)
+Classification: K01 Vendor / K02 Subscription / K03 SaaS
+Status: candidate, not yet evaluated (added 2026-10-31).
+
+Newest evaluation goes at the top. Do not edit an old evaluation; add a new dated one.
+
+## Evaluation: not started
+
+- Date: _YYYY-MM-DD_
+- Tier evaluated: _e.g. Plus / Pro / Team_
+- Evaluator: _Daniel / agent (sources checked)_
+
+| ID | Criterion | Priority | Score | Implementation note | Source / confirmed vs assumed |
+|----|-----------|----------|-------|---------------------|-------------------------------|
+| C01 | Connector catalogue size | normal | ? | | |
+| C02 | Connector access by subscription tier | normal | ? | | |
+| C03 | Google Workspace integration | high | ? | | |
+| C04 | Google Drive access level | high | ? | | |
+| C05 | Gmail access level | high | ? | | |
+| C06 | Gmail attachments | high | ? | | |
+| C07 | Google Contacts access level | high | ? | | |
+| C08 | Multiple accounts per connector | top | ? | | |
+| C09 | Profile naming / aliases | top | ? | | |
+| C10 | Profile limit per connector | top | ? | | |
+| C11 | Profile selection handling | top | ? | | |
+| C12 | Google Calendar access level | high | ? | | |
+| C13 | Linux desktop app | normal | ? | | |
+| C14 | Linux CLI | normal | ? | | |
+| C15 | Android app | normal | ? | | |
+| C16 | Cross-device conversation history sync | normal | ? | | |
+| C17 | Native speech-to-text, desktop | normal | ? | | |
+| C18 | Native speech-to-text, Android | normal | ? | | |
+| C19 | Connector invocation mode | normal | ? | | |
+| C20 | Human-in-the-loop controls | normal | ? | | |
+| C21 | Parallel CLI coding product | normal | ? | | |
+| C22 | Project boundaries and where project data lives | normal | ? | | |
+| C23 | Custom MCP connections | high | ? | | |
+| C24 | Tunnels to own infrastructure / AI gateway | high | ? | | |
+| C25 | Purpose-built for integrations | top | ? | | |
+| C26 | Output routing to own storage | normal | ? | | |
+| C27 | Backup / export API | normal | ? | | |
+| C28 | Bring your own memory | normal | ? | | |
+| C29 | Background agents, scheduled tasks and reminders | normal | ? | | |
+| C30 | Locally hosted tool integration, e.g. Home Assistant | high | ? | | |
+| C31 | Distributed deployments / satellites | normal | ? | | |
+
+### Verdict
+
+_TBD_
