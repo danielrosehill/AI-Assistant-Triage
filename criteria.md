@@ -57,7 +57,7 @@ the real cost of using the platform agentically is much higher than its entry pr
 monthly price (note currency and region; no US egress from this machine), and whether
 custom connectors are gated differently from catalogue ones.
 
-## Google Workspace group (C03-C07)
+## Google Workspace group (C03-C07, C12)
 
 Daniel flagged this group as very important. Score them together. For every one, the
 implementation note must say **how** access is provided: a native vendor connector, a
@@ -66,7 +66,7 @@ hosts. Only the first two count as `Yes`; custom-MCP-only scores `Partial`.
 Also note whether the connector works for personal Google accounts, Workspace (business)
 accounts, or both.
 
-Access-level scores for C04, C05 and C07: `Read-write`, `Read-only`, `None`, `?`.
+Access-level scores for C04, C05, C07 and C12: `Read-write`, `Read-only`, `None`, `?`.
 Read-write means the assistant can create or modify (e.g. upload/edit a Drive file,
 send or draft an email, create/edit a contact), not just search and read.
 
@@ -100,6 +100,15 @@ archiving. Draft-only is scored `Read-write` with that noted.
 ### C07 Google Contacts access level (`daniel`, `priority: high`)
 
 **Asks:** Is Google Contacts access read-only or read-write?
+
+### C12 Google Calendar access level (`daniel`, `priority: high`)
+
+_Added 2026-10-31 after C08-C11; IDs are stable, so it is numbered C12 but belongs to this group._
+
+**Asks:** Is Google Calendar access read-only or read-write?
+
+**Record:** whether write means creating events, editing/deleting them, or both; whether
+it can see calendars other than the primary one.
 
 ## Multiple accounts per connector group (C08-C11)
 
