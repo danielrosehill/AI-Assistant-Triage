@@ -252,3 +252,69 @@ or "reads run automatically, writes need approval".
 **Record:** where the settings live, whether approvals can be "remember for this chat"
 or "always", whether the policy applies to custom connectors too, and how approval works
 for background/scheduled tasks (in-app prompt, push notification, task waits vs fails).
+
+## Coding product and projects group (C21-C22)
+
+Priority: normal (no weighting given, 2026-10-31).
+
+### C21 Parallel CLI coding product (`daniel`)
+
+**Asks:** Does the vendor also ship a coding agent product in the CLI (alongside the
+chat assistant), and how is it handled relative to the chat app?
+
+**Score:** `Yes` / `No`, plus the product name and the relationship, summarised as:
+- `Separate workspace`: own sessions/history, not visible in the chat app (the common approach).
+- `Partly shared`: same subscription and maybe shared settings or connectors, but
+  separate history.
+- `Integrated`: coding sessions appear in, or can be continued from, the chat app.
+
+**Record:** whether it is included in the same subscription, whether connectors/MCP
+configured in the chat app carry over to the CLI, and whether a web/cloud version of the
+coding agent shows up inside the chat app.
+
+### C22 Project boundaries and where project data lives (`daniel`)
+
+**Asks:** Can you define projects (workspaces) that bound context, files, instructions
+and connectors? Is that project data synced to the cloud or kept locally?
+
+**Score:** `Yes` / `Partial` / `No`, plus storage: `Cloud`, `Local`, `Both` (e.g. cloud
+in the chat app, local in the CLI).
+
+**Record:** what a project scopes (custom instructions, files, memory, chat history,
+connectors enabled), whether memory leaks across project boundaries or can be isolated,
+and whether projects sync across devices.
+
+## Custom connections and own infrastructure group (C23-C24)
+
+Daniel flagged this group as very important (2026-10-31).
+
+### C23 Custom MCP connections (`daniel`, `priority: high`)
+
+**Asks:** Can the user add their own MCP server, not just pick from the catalogue?
+
+**Score:** `Yes` / `Partial` (e.g. mode-gated, admin-only, read-only tools, desktop-only)
+/ `No` / `?`.
+
+**Record:** remote (URL) and/or local (stdio) servers; transports accepted (streamable
+HTTP, SSE); auth supported (OAuth, bearer/API-key header, none); which tiers; which
+clients (web, desktop, mobile: a server added on web may not work on Android); whether
+an admin must approve it on business plans; any limits on tools per server.
+
+### C24 Tunnels to own infrastructure / AI gateway (`daniel`, `priority: high`)
+
+**Asks:** Is there support for reaching your own infrastructure (home server, private
+network, your own MCP/AI gateway) from the assistant? If so, how is it implemented?
+
+**Score:**
+- `Official tunnel`: vendor-provided tunnel/connector/agent that reaches private
+  networks without exposing a public endpoint.
+- `Local bridge`: a desktop app or CLI on your machine can reach local/private servers
+  (e.g. local stdio MCP), but cloud/mobile chats cannot.
+- `DIY only`: works only if you expose the server publicly yourself (e.g. Cloudflare
+  Tunnel, Tailscale Funnel, ngrok) and add it as a remote custom connector.
+- `No` / `?`
+
+**Record:** how it is implemented, what auth it supports in front of the tunnel
+(e.g. can it pass Cloudflare Access service-token headers, or OAuth only), and **user
+feedback**: a short summary of reports from forums, GitHub issues, Reddit, with links
+and dates (reliability, timeouts, auth breakage, IP allowlisting).

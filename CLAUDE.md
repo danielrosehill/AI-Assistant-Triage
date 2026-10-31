@@ -50,7 +50,8 @@ unless re-evaluated (and re-dated).
 
 - `criteria.md`: the feature checklist and scoring scheme.
 - `scorecards/<tool-slug>.md`: one file per tool, newest evaluation at the top.
-- `README.md`: purpose, scope, and the summary table across tools.
+- `README.md`: purpose, scope, candidates, and the summary matrix (criteria as rows, tools as columns).
+- When a criterion is added to `criteria.md`, add its row to the README matrix and to every scorecard table.
 
 ## Research rules
 

@@ -20,14 +20,46 @@ This space moves fast. Every scorecard is dated and states the plan/tier evaluat
 A feature marked absent may have shipped since. Treat everything here as a snapshot,
 not a current verdict.
 
+## Candidates
+
+Initial list (2026-10-31): ChatGPT, Claude (the official Claude apps), Grok.
+
 ## Criteria
 
 See [`criteria.md`](criteria.md).
 
 ## Summary
 
-| Tool | Type | Evaluated | Tier evaluated | C01 Catalogue | C02 Tier access | C03 Google Workspace | C04 Drive | C05 Gmail | C06 Gmail attach. | C07 Contacts | C12 Calendar | C08 Multi-account | C09 Aliases | C10 Profile limit | C11 Profile selection | C13 Linux desktop | C14 Linux CLI | C15 Android | C16 History sync | C17 STT desktop | C18 STT Android | C19 Invocation mode | C20 Human-in-the-loop | Verdict |
-|------|------|-----------|----------------|---------------|-----------------|----------------------|-----------|-----------|-------------------|--------------|--------------|-------------------|-------------|-------------------|-----------------------|-------------------|---------------|-------------|------------------|-----------------|-----------------|---------------------|-----------------------|---------|
-| _none yet_ | | | | | | | | | | | | | | | | | | | | | | | | |
+Criteria are rows and tools are columns, so adding a tool adds a column. `?` = not yet verified.
+
+| ID | Criterion | Priority | [ChatGPT](scorecards/chatgpt.md) | [Claude](scorecards/claude.md) | [Grok](scorecards/grok.md) |
+|----|-----------|----------|---|---|---|
+| | **Evaluated** | | not yet | not yet | not yet |
+| | **Tier evaluated** | | | | |
+| C01 | Connector catalogue size | normal | ? | ? | ? |
+| C02 | Connector access by subscription tier | normal | ? | ? | ? |
+| C03 | Google Workspace integration | high | ? | ? | ? |
+| C04 | Google Drive access level | high | ? | ? | ? |
+| C05 | Gmail access level | high | ? | ? | ? |
+| C06 | Gmail attachments | high | ? | ? | ? |
+| C07 | Google Contacts access level | high | ? | ? | ? |
+| C08 | Multiple accounts per connector | top | ? | ? | ? |
+| C09 | Profile naming / aliases | top | ? | ? | ? |
+| C10 | Profile limit per connector | top | ? | ? | ? |
+| C11 | Profile selection handling | top | ? | ? | ? |
+| C12 | Google Calendar access level | high | ? | ? | ? |
+| C13 | Linux desktop app | normal | ? | ? | ? |
+| C14 | Linux CLI | normal | ? | ? | ? |
+| C15 | Android app | normal | ? | ? | ? |
+| C16 | Cross-device conversation history sync | normal | ? | ? | ? |
+| C17 | Native speech-to-text, desktop | normal | ? | ? | ? |
+| C18 | Native speech-to-text, Android | normal | ? | ? | ? |
+| C19 | Connector invocation mode | normal | ? | ? | ? |
+| C20 | Human-in-the-loop controls | normal | ? | ? | ? |
+| C21 | Parallel CLI coding product | normal | ? | ? | ? |
+| C22 | Project boundaries and where project data lives | normal | ? | ? | ? |
+| C23 | Custom MCP connections | high | ? | ? | ? |
+| C24 | Tunnels to own infrastructure / AI gateway | high | ? | ? | ? |
+| | **Verdict** | | | | |
 
 Per-tool detail: [`scorecards/`](scorecards/).
