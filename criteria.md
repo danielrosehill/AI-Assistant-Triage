@@ -1,6 +1,6 @@
 # Triage criteria
 
-_Last changed 2026-10-31. Criteria are a mix of general ones and ones specific to Daniel's use; each is tagged `general` or `daniel`, and `priority: high` where Daniel has said it is critical._
+_Last changed 2026-10-31. Criteria are a mix of general ones and ones specific to Daniel's use; each is tagged `general` or `daniel`, and with a priority weighting: `priority: top` (near the top of Daniel's list), `priority: high` (very important), otherwise normal._
 
 Triage looks at two things per criterion: **whether** the feature exists, and **how**
 it is implemented (e.g. remote vs local MCP, OAuth vs pasted key, per-chat vs global
@@ -100,3 +100,46 @@ archiving. Draft-only is scored `Read-write` with that noted.
 ### C07 Google Contacts access level (`daniel`, `priority: high`)
 
 **Asks:** Is Google Contacts access read-only or read-write?
+
+## Multiple accounts per connector group (C08-C11)
+
+Daniel weights this group near the top. The use case: one connector type (e.g. Gmail)
+connected twice, once to a personal account and once to a work Workspace account, each
+usable in the same assistant.
+
+Reference example (observed by Daniel, 2026-10-31): ChatGPT allows a Gmail connector for
+a personal account and a second one for a work Workspace account, each with its own name.
+
+### C08 Multiple accounts per connector (`daniel`, `priority: top`)
+
+**Asks:** Can the same connector be connected more than once, to different accounts
+(profiles)?
+
+**Score:** `Yes` / `Partial` (e.g. only by adding the same service again as a custom
+MCP server, or only one active at a time) / `No` / `?`.
+
+### C09 Profile naming / aliases (`daniel`, `priority: top`)
+
+**Asks:** Can each connected profile be given its own name or alias (e.g. "Gmail
+personal", "Gmail work")?
+
+**Score:** `Yes` / `No` / `?`. Note whether the alias is visible to the model (so you can
+say "use my work mail") or only shown in the settings UI.
+
+### C10 Profile limit per connector (`daniel`, `priority: top`)
+
+**Asks:** Is there a maximum number of profiles per connector, or per account?
+
+**Score:** the number, `Unlimited` (no documented or observed limit), or `?`. Note
+whether the limit is documented or observed.
+
+### C11 Profile selection handling (`daniel`, `priority: top`)
+
+**Asks:** When several profiles of one connector exist, how do you specify which one
+to use?
+
+**Record (implementation, not a single score):** the mechanisms available, e.g. naming
+it in the prompt, per-chat toggle, per-project/workspace default, picker in the
+composer, model picks automatically. Note what happens when it is ambiguous (asks,
+guesses, uses all). Summarise in the matrix as `Explicit` (user can pin a profile),
+`Prompt only` (only by naming it), `Auto only`, or `?`.
