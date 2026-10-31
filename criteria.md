@@ -152,3 +152,55 @@ it in the prompt, per-chat toggle, per-project/workspace default, picker in the
 composer, model picks automatically. Note what happens when it is ambiguous (asks,
 guesses, uses all). Summarise in the matrix as `Explicit` (user can pin a profile),
 `Prompt only` (only by naming it), `Auto only`, or `?`.
+
+## Clients and platforms group (C13-C18)
+
+Priority: normal (no weighting given, 2026-10-31).
+
+For C13-C15, score `Yes` only for an **official** vendor client. A community or
+unofficial client scores `No`, with it named in the note (e.g. `No (community: AppImage
+wrapper)`), since it may lag features or break. A PWA / "install the website" counts as
+`No` with `PWA` noted, unless the vendor ships it as its official app for that platform.
+
+**Type** = how it is distributed. Record every channel offered.
+
+### C13 Linux desktop app (`daniel`)
+
+**Score:** `Yes` / `No`, plus type: `deb`, `rpm`, `AppImage`, `Flatpak`, `Snap`, `AUR`,
+`tarball`, `PWA`.
+
+### C14 Linux CLI (`daniel`)
+
+**Asks:** Is there an official command-line client that runs on Linux and uses the
+same account/subscription (not just a raw API key)?
+
+**Score:** `Yes` / `No`, plus type: `npm`, `pip/uv`, `binary`, `Homebrew`, `apt/repo`,
+`cargo`, `go install`, `Docker`. Note if it only works with API billing rather than the
+subscription.
+
+### C15 Android app (`daniel`)
+
+**Score:** `Yes` / `No`, plus type: `Play Store`, `APK`, `F-Droid`, `PWA`.
+
+### C16 Cross-device conversation history sync (`daniel`)
+
+**Asks:** Is conversation history synced through the cloud, so a chat started on one
+device (web, desktop, Android, CLI) is available on the others?
+
+**Score:** `Yes` / `Partial` (e.g. CLI or desktop history stays local) / `No` / `?`.
+Note which clients are in the sync and which are not.
+
+### C17 Native speech-to-text, desktop (`daniel`)
+
+**Asks:** Does the desktop client (or web app, if there is no desktop app) have built-in
+voice dictation into the chat input?
+
+**Score:** `Yes` / `No` / `?`. Note dictation vs full voice-conversation mode, and
+whether it works on the Linux client specifically.
+
+### C18 Native speech-to-text, Android (`daniel`)
+
+**Asks:** Does the Android app have built-in voice dictation beyond the system keyboard's?
+
+**Score:** `Yes` / `No` / `?`. Note dictation vs voice mode, and language support
+(Hebrew if known).

@@ -26,8 +26,8 @@ See [`criteria.md`](criteria.md).
 
 ## Summary
 
-| Tool | Type | Evaluated | Tier evaluated | C01 Catalogue | C02 Tier access | C03 Google Workspace | C04 Drive | C05 Gmail | C06 Gmail attach. | C07 Contacts | C12 Calendar | C08 Multi-account | C09 Aliases | C10 Profile limit | C11 Profile selection | Verdict |
-|------|------|-----------|----------------|---------------|-----------------|----------------------|-----------|-----------|-------------------|--------------|--------------|-------------------|-------------|-------------------|-----------------------|---------|
-| _none yet_ | | | | | | | | | | | | | | | | |
+| Tool | Type | Evaluated | Tier evaluated | C01 Catalogue | C02 Tier access | C03 Google Workspace | C04 Drive | C05 Gmail | C06 Gmail attach. | C07 Contacts | C12 Calendar | C08 Multi-account | C09 Aliases | C10 Profile limit | C11 Profile selection | C13 Linux desktop | C14 Linux CLI | C15 Android | C16 History sync | C17 STT desktop | C18 STT Android | Verdict |
+|------|------|-----------|----------------|---------------|-----------------|----------------------|-----------|-----------|-------------------|--------------|--------------|-------------------|-------------|-------------------|-----------------------|-------------------|---------------|-------------|------------------|-----------------|-----------------|---------|
+| _none yet_ | | | | | | | | | | | | | | | | | | | | | | |
 
 Per-tool detail: [`scorecards/`](scorecards/).
