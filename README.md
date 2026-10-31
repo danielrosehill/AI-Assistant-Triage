@@ -26,8 +26,8 @@ See [`criteria.md`](criteria.md).
 
 ## Summary
 
-| Tool | Type | Evaluated | Tier | Score | Verdict |
-|------|------|-----------|------|-------|---------|
-| _none yet_ | | | | | |
+| Tool | Type | Evaluated | Tier evaluated | C01 Catalogue size | C02 Tier access | Verdict |
+|------|------|-----------|----------------|--------------------|-----------------|---------|
+| _none yet_ | | | | | | |
 
 Per-tool detail: [`scorecards/`](scorecards/).
