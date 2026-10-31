@@ -204,3 +204,51 @@ whether it works on the Linux client specifically.
 
 **Score:** `Yes` / `No` / `?`. Note dictation vs voice mode, and language support
 (Hebrew if known).
+
+## Connector usage and control group (C19-C20)
+
+Priority: normal (no weighting given, 2026-10-31).
+
+### C19 Connector invocation mode (`daniel`)
+
+**Asks:** How are connectors used in practice? Are they available in ordinary chat, or
+only in a specific mode (e.g. an "agent", "developer", "deep research" or "connectors"
+mode, a particular model, or a project/workspace setting)?
+
+**Score (best to worst):**
+- `Always on`: enabled connectors are available in any normal chat; the model calls them
+  when relevant.
+- `Per-chat toggle`: available in normal chat but must be switched on per conversation
+  (e.g. via a composer menu or @-mention).
+- `Mode-gated`: only usable inside a specific mode or with specific models; note which,
+  and what that mode loses (e.g. memory, other tools, model choice).
+- `?`
+
+**Record:** the exact mode/toggle names, whether custom connectors and catalogue
+connectors behave differently (custom ones are often mode-gated when catalogue ones are
+not), and whether the mode differs between web, desktop and mobile.
+
+### C20 Human-in-the-loop controls (`daniel`)
+
+**Asks:** Is there deterministic, user-configurable control over when the assistant must
+ask before a connector action runs, or does it rely on the model choosing to ask, or on
+generic notifications?
+
+"Deterministic" means the platform enforces it regardless of what the model decides:
+e.g. per-connector or per-tool settings such as always allow / always ask / never allow,
+or "reads run automatically, writes need approval".
+
+**Score (best to worst):**
+- `Deterministic, granular`: per-tool (or read vs write) approval policy set by the user
+  and enforced by the platform.
+- `Deterministic, coarse`: platform-enforced confirmation, but all-or-nothing (e.g. every
+  write action asks, with no way to tune it per tool).
+- `Model-driven`: confirmation happens only if the model decides to ask in chat; no
+  platform-level policy.
+- `Notifications only`: approvals surface as push/email notifications for background or
+  agent tasks, with no per-tool policy.
+- `None` / `?`
+
+**Record:** where the settings live, whether approvals can be "remember for this chat"
+or "always", whether the policy applies to custom connectors too, and how approval works
+for background/scheduled tasks (in-app prompt, push notification, task waits vs fails).
