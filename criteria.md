@@ -7,6 +7,10 @@ it is implemented (e.g. remote vs local MCP, OAuth vs pasted key, per-chat vs gl
 enablement, bundled in a plugin vs configured by hand). The implementation note often
 matters more than the yes/no.
 
+A machine-readable copy with allowed values, suggested points and weights is in
+[`criteria.json`](criteria.json), rendered as [`docs/evaluation-matrix.pdf`](docs/evaluation-matrix.pdf)
+(weights and points are suggestions, not yet adopted). Keep both in step.
+
 Each criterion is documented below with: a short name and ID (`C01`, `C02`...), what it
 asks, why it matters, and what implementation variants to record.
 

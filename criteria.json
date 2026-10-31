@@ -1,0 +1,517 @@
+{
+  "updated": "2026-10-31",
+  "description": "Machine-readable form of criteria.md: every scored criterion (C01-C43) with its group, tag, priority, suggested weight, what it asks, what the score is based on, and the allowed score values with suggested points. criteria.md stays the prose source; when a criterion changes there, change it here in the same commit. Rendered to docs/evaluation-matrix.pdf by docs/evaluation-matrix.typ.",
+  "status_of_weights_and_points": "SUGGESTED, not yet adopted by Daniel (proposed by Agent (Claude Opus 5.5), 2026-10-31). Scorecards do not use them yet.",
+  "scoring": {
+    "weights": {
+      "top": 3,
+      "high": 2,
+      "normal": 1
+    },
+    "weights_basis": "Derived from the priority tags in criteria.md: priority: top = 3, priority: high = 2, untagged = 1.",
+    "points_range": [0, 1],
+    "excluded_values": ["?", "N/A"],
+    "formula": "tool_score = sum(weight_i * points_i) / sum(weight_i), over criteria whose value is not in excluded_values. Report the coverage (scored criteria / total) next to the score, since '?' cells are left out rather than scored 0.",
+    "group_score": "Same formula restricted to one group, so groups can be compared without one dominating.",
+    "qualifier_note": "Some criteria carry a qualifier as well as a score (e.g. C22 storage, C34 format, C13-C15 type). Qualifiers are recorded but not scored."
+  },
+  "groups": [
+    {"id": "A", "name": "Connector ecosystem", "summary": "What connectors exist, who gets them, and whether integration is the product's core."},
+    {"id": "B", "name": "Google Workspace", "summary": "Native or catalogue Google access; custom-MCP-only scores Partial. Note personal vs Workspace accounts."},
+    {"id": "C", "name": "Multiple accounts per connector", "summary": "One connector type connected to several accounts (personal + work) in the same assistant."},
+    {"id": "D", "name": "Connector usage and control", "summary": "How connectors are invoked and what stops them acting without you."},
+    {"id": "E", "name": "Own infrastructure and local tools", "summary": "Reaching things you host: gateways, home network tools, your own servers."},
+    {"id": "F", "name": "Data ownership", "summary": "Getting your data out and keeping memory under your control."},
+    {"id": "G", "name": "Agents, projects and coding", "summary": "Work that outlives a single chat: background agents, project boundaries, the companion coding product."},
+    {"id": "H", "name": "Clients and platforms", "summary": "Official clients only; PWAs count only for C13 and must be labelled."}
+  ],
+  "criteria": [
+    {
+      "id": "C25", "group": "A", "name": "Purpose-built for integrations", "tag": "daniel", "priority": "top",
+      "asks": "Is connecting an AI to external tools the platform's main purpose, or is it a general conversational tool with an integration feature added on?",
+      "basis": "Judgement call from positioning, where connectors sit in the UI and docs, whether the product is usable at all without them, and depth of connector management (profiles, permissions, logs, testing).",
+      "score": {"type": "enum", "values": [
+        {"value": "Integration-first", "points": 1.0},
+        {"value": "General + integrations", "points": 0.4},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C01", "group": "A", "name": "Connector catalogue size", "tag": "general", "priority": "normal",
+      "asks": "How many ready-to-integrate connectors can a user switch on without writing or hosting anything?",
+      "basis": "Approximate count with date and place counted (directory page, docs, in-app); who builds them (vendor, partner, community); whether bring-your-own connectors are also allowed (note only).",
+      "score": {"type": "count_band", "record": "integer count", "values": [
+        {"value": "Large", "range": "100+", "points": 1.0},
+        {"value": "Medium", "range": "20-99", "points": 0.66},
+        {"value": "Small", "range": "1-19", "points": 0.33},
+        {"value": "None", "range": "0", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C40", "group": "A", "name": "Official connector directory: URLs", "tag": "general", "priority": "normal",
+      "asks": "Is the connector library published at an official URL a human can browse, and as a programmatic list (JSON or API/registry endpoint) an agent can read?",
+      "basis": "Both URLs; whether the JSON needs auth; fields carried (name, description, auth type, MCP URL); official vs community mirror (mirrors do not count).",
+      "score": {"type": "enum", "values": [
+        {"value": "Both", "points": 1.0},
+        {"value": "JSON only", "points": 0.6},
+        {"value": "Human only", "points": 0.5},
+        {"value": "In-app only", "points": 0.2},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C23", "group": "A", "name": "Custom MCP connections", "tag": "daniel", "priority": "high",
+      "asks": "Can the user add their own MCP server, not just pick from the catalogue?",
+      "basis": "Remote (URL) and/or local (stdio); transports (streamable HTTP, SSE); auth (OAuth, bearer/API-key header, none); tiers; clients (web, desktop, mobile); admin approval on business plans; tool limits per server.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.5, "meaning": "mode-gated, admin-only, read-only tools or desktop-only"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C41", "group": "A", "name": "Native private connectors", "tag": "daniel", "priority": "normal",
+      "asks": "Is there native support for private connectors you or your org build and use without publishing them publicly?",
+      "basis": "Mechanism (custom MCP URL, unlisted/draft app, org-private catalogue, developer mode); who can create and see it; tiers; auth options; whether vendor review is needed.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0, "meaning": "first-class private connectors shared with chosen people"},
+        {"value": "Partial", "points": 0.5, "meaning": "only a per-user custom MCP URL, or business plans only"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C42", "group": "A", "name": "Plugin authorship and listing", "tag": "general", "priority": "normal",
+      "asks": "How does a third party get a connector listed in the official directory?",
+      "basis": "Submission URL; requirements (MCP server, manifest, privacy policy, security review, verified domain); review time; fees or revenue share; whether individuals can publish.",
+      "score": {"type": "enum", "values": [
+        {"value": "Open submission", "points": 1.0},
+        {"value": "Partner only", "points": 0.4},
+        {"value": "Closed", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C32", "group": "A", "name": "Progressive tool discovery and tool limits", "tag": "daniel", "priority": "normal",
+      "asks": "Are tool definitions loaded up front, or discovered progressively (tool search, deferred loading)? What limits apply to the number of tools?",
+      "basis": "Documented and observed limits (per server, per chat, total servers); behaviour at the limit (error, truncation, dropped tools); whether progressive loading covers custom MCP servers.",
+      "score": {"type": "enum", "values": [
+        {"value": "Progressive", "points": 1.0},
+        {"value": "Eager, high limit", "points": 0.5},
+        {"value": "Eager, low limit", "points": 0.1},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C33", "group": "A", "name": "Plugin packaging format", "tag": "daniel", "priority": "normal",
+      "asks": "How is a plugin (bundle of connectors, instructions, skills, commands) packaged and declared? Open standard or proprietary?",
+      "basis": "Manifest file and schema with spec link; what a plugin can contain; install from local path or Git URL; whether the package works in another vendor's tool.",
+      "score": {"type": "enum", "values": [
+        {"value": "Standard", "points": 1.0},
+        {"value": "Documented proprietary", "points": 0.6},
+        {"value": "Closed", "points": 0.2},
+        {"value": "No plugins", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C34", "group": "A", "name": "Custom marketplaces", "tag": "daniel", "priority": "normal",
+      "asks": "Can you add your own plugin marketplaces beyond the vendor's? How many, and in what format?",
+      "basis": "How a marketplace is declared (Git repo with manifest, JSON URL, MCP registry API); limit on marketplaces; whether private (authenticated) marketplaces work; sync across clients.",
+      "score": {"type": "enum", "qualifier": {"name": "format", "values": ["Standard", "Proprietary"]}, "values": [
+        {"value": "Yes", "points": 1.0, "meaning": "record the number allowed or Unlimited"},
+        {"value": "Partial", "points": 0.5, "meaning": "admin-only, or one private catalogue on business plans"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C02", "group": "A", "name": "Connector access by subscription tier", "tag": "general", "priority": "normal",
+      "asks": "Is connector access restricted by tier, available to every paying subscriber, or free?",
+      "basis": "Which tiers get what; cheapest tier with connector access and its monthly price (currency and region; no US egress); whether custom connectors are gated differently from catalogue ones.",
+      "score": {"type": "enum", "values": [
+        {"value": "Free", "points": 1.0},
+        {"value": "All paid", "points": 0.7},
+        {"value": "Tiered", "points": 0.4},
+        {"value": "Enterprise only", "points": 0.1},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C39", "group": "A", "name": "Subscription pricing and restrictions", "tag": "daniel", "priority": "normal",
+      "asks": "What does each tier cost, and what restrictions affect agentic use (message/credit caps, connector or account caps, task limits, seat minimums, annual-only billing)?",
+      "basis": "Every tier with price, currency and period as displayed (region noted); what each tier unlocks for connectors; documented restrictions; pricing page link and date read.",
+      "score": {"type": "price", "record": "cheapest tier that gets C03-C12 at their best level for that tool, e.g. 'Plus $20/mo'", "values": [
+        {"value": "<= 25/mo", "points": 1.0},
+        {"value": "26-60/mo", "points": 0.6},
+        {"value": "61-150/mo", "points": 0.3},
+        {"value": "> 150/mo or sales-only", "points": 0.0},
+        {"value": "?", "points": null}
+      ], "note": "Price bands are a suggestion; convert to one currency at the date read before banding."}
+    },
+    {
+      "id": "C03", "group": "B", "name": "Google Workspace integration", "tag": "daniel", "priority": "high",
+      "asks": "Does the platform support Google Workspace integration at all?",
+      "basis": "How access is provided: native vendor connector or third-party catalogue connector (count as Yes) vs custom MCP only (Partial); personal accounts, Workspace accounts, or both.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.4, "meaning": "custom MCP only, or limited"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C04", "group": "B", "name": "Google Drive access level", "tag": "daniel", "priority": "high",
+      "asks": "Is Google Drive access read-only or read-write?",
+      "basis": "File types searched/read (Docs, Sheets, arbitrary files); whether write means creating new files, editing existing ones, or both; connector route as for C03.",
+      "score": {"type": "enum", "ref": "access_level", "values": [
+        {"value": "Read-write", "points": 1.0},
+        {"value": "Read-only", "points": 0.4},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C05", "group": "B", "name": "Gmail access level", "tag": "daniel", "priority": "high",
+      "asks": "Is Gmail access read-only or read-write?",
+      "basis": "Whether write means sending directly, drafts only (scored Read-write, noted), or labelling/archiving; connector route as for C03.",
+      "score": {"type": "enum", "ref": "access_level", "values": [
+        {"value": "Read-write", "points": 1.0},
+        {"value": "Read-only", "points": 0.4},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C06", "group": "B", "name": "Gmail attachments", "tag": "daniel", "priority": "high",
+      "asks": "Does the Gmail integration support attachments?",
+      "basis": "Whether incoming attachments can be read and whether mail can be sent or drafted with attachments.",
+      "score": {"type": "enum", "values": [
+        {"value": "Both", "points": 1.0},
+        {"value": "Read only", "points": 0.5},
+        {"value": "Send only", "points": 0.5},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C07", "group": "B", "name": "Google Contacts access level", "tag": "daniel", "priority": "high",
+      "asks": "Is Google Contacts access read-only or read-write?",
+      "basis": "Whether contacts can be created and edited, or only searched and read; connector route as for C03.",
+      "score": {"type": "enum", "ref": "access_level", "values": [
+        {"value": "Read-write", "points": 1.0},
+        {"value": "Read-only", "points": 0.4},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C12", "group": "B", "name": "Google Calendar access level", "tag": "daniel", "priority": "high",
+      "asks": "Is Google Calendar access read-only or read-write?",
+      "basis": "Whether write means creating, editing/deleting events, or both; whether non-primary calendars are visible; connector route as for C03.",
+      "score": {"type": "enum", "ref": "access_level", "values": [
+        {"value": "Read-write", "points": 1.0},
+        {"value": "Read-only", "points": 0.4},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C08", "group": "C", "name": "Multiple accounts per connector", "tag": "daniel", "priority": "top",
+      "asks": "Can the same connector be connected more than once, to different accounts (profiles)?",
+      "basis": "Observed or documented ability to add a second instance of one connector (reference: ChatGPT, two Gmail connectors, observed by Daniel 2026-10-31).",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.4, "meaning": "only via a duplicate custom MCP server, or one active at a time"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C09", "group": "C", "name": "Profile naming / aliases", "tag": "daniel", "priority": "top",
+      "asks": "Can each connected profile be given its own name or alias (e.g. 'Gmail personal', 'Gmail work')?",
+      "basis": "Whether aliasing exists, and whether the alias is visible to the model or only in the settings UI.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C10", "group": "C", "name": "Profile limit per connector", "tag": "daniel", "priority": "top",
+      "asks": "Is there a maximum number of profiles per connector, or per account?",
+      "basis": "The limit and whether it is documented or observed.",
+      "score": {"type": "count_band", "record": "integer limit or 'Unlimited'", "values": [
+        {"value": "Unlimited", "points": 1.0},
+        {"value": "5+", "points": 0.8},
+        {"value": "2-4", "points": 0.5},
+        {"value": "1", "points": 0.0},
+        {"value": "?", "points": null}
+      ], "note": "Bands are a suggestion; criteria.md records the raw number."}
+    },
+    {
+      "id": "C11", "group": "C", "name": "Profile selection handling", "tag": "daniel", "priority": "top",
+      "asks": "When several profiles of one connector exist, how do you specify which one to use?",
+      "basis": "Mechanisms available (naming in the prompt, per-chat toggle, per-project default, composer picker, automatic); behaviour when ambiguous (asks, guesses, uses all).",
+      "score": {"type": "enum", "values": [
+        {"value": "Explicit", "points": 1.0, "meaning": "user can pin a profile"},
+        {"value": "Prompt only", "points": 0.5},
+        {"value": "Auto only", "points": 0.2},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C19", "group": "D", "name": "Connector invocation mode", "tag": "daniel", "priority": "normal",
+      "asks": "Are connectors available in ordinary chat, or only in a specific mode, model or project setting?",
+      "basis": "Exact mode/toggle names; whether custom and catalogue connectors behave differently; whether it differs between web, desktop and mobile; what a gating mode loses.",
+      "score": {"type": "enum", "values": [
+        {"value": "Always on", "points": 1.0},
+        {"value": "Per-chat toggle", "points": 0.6},
+        {"value": "Mode-gated", "points": 0.2},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C20", "group": "D", "name": "Human-in-the-loop controls", "tag": "daniel", "priority": "normal",
+      "asks": "Is there deterministic, user-configurable control over when the assistant must ask before a connector action runs?",
+      "basis": "Where settings live; 'remember for this chat' vs 'always'; whether policy covers custom connectors; how approval works for background tasks (prompt, push, task waits vs fails).",
+      "score": {"type": "enum", "values": [
+        {"value": "Deterministic, granular", "points": 1.0},
+        {"value": "Deterministic, coarse", "points": 0.6},
+        {"value": "Model-driven", "points": 0.25},
+        {"value": "Notifications only", "points": 0.15},
+        {"value": "None", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C36", "group": "D", "name": "Autonomy modes and permission structure", "tag": "daniel", "priority": "normal",
+      "asks": "What levels of agent supervision exist, from fully supervised to fully autonomous, and how is the permission structure built?",
+      "basis": "Mode names; how rules are expressed (per tool, command pattern, path, connector); where stored (user, project, admin policy) and which layer wins; mid-session switching; whether chat app and CLI share the model.",
+      "score": {"type": "enum", "values": [
+        {"value": "Full range", "points": 1.0},
+        {"value": "Partial", "points": 0.5},
+        {"value": "Supervised only", "points": 0.2},
+        {"value": "Autonomous only", "points": 0.2},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C43", "group": "D", "name": "Team federation of plugin access", "tag": "daniel", "priority": "normal",
+      "asks": "On team plans, can an admin add connectors once for the org, allow/block them, scope them to groups, and choose per-user vs shared credentials?",
+      "basis": "Admin location; SSO/SCIM group-driven access; per-user vs service credentials; pushing custom/private connectors to members; audit logging; tier needed.",
+      "score": {"type": "enum", "values": [
+        {"value": "Granular", "points": 1.0},
+        {"value": "Coarse", "points": 0.5},
+        {"value": "None", "points": 0.0},
+        {"value": "N/A", "points": null, "meaning": "no team plan"},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C31", "group": "E", "name": "Distributed deployments / satellites", "tag": "daniel", "priority": "top",
+      "asks": "Is there built-in support for a network of deployments, e.g. the main app delegating to a CLI on a local server acting as a satellite?",
+      "basis": "How instances are paired and authenticated; whether the satellite uses its local tools/files for the main app; whether it works from mobile.",
+      "score": {"type": "enum", "values": [
+        {"value": "Native", "points": 1.0},
+        {"value": "Partial", "points": 0.5, "meaning": "remote control of one CLI session, no delegation"},
+        {"value": "DIY", "points": 0.2, "meaning": "only by wrapping the CLI as an MCP server"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C24", "group": "E", "name": "Tunnels to own infrastructure / AI gateway", "tag": "daniel", "priority": "high",
+      "asks": "Can the assistant reach your own infrastructure (home server, private network, own MCP/AI gateway)? How?",
+      "basis": "Implementation; auth supported in front of the tunnel (e.g. Cloudflare Access service-token headers vs OAuth only); user feedback from forums, GitHub issues, Reddit with links and dates.",
+      "score": {"type": "enum", "values": [
+        {"value": "Official tunnel", "points": 1.0},
+        {"value": "Local bridge", "points": 0.6},
+        {"value": "DIY only", "points": 0.3},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C30", "group": "E", "name": "Locally hosted tool integration (e.g. Home Assistant)", "tag": "daniel", "priority": "high",
+      "asks": "How would the platform reach and control a locally hosted tool like Home Assistant natively?",
+      "basis": "The concrete Home Assistant route (official connector, HA MCP server integration, desktop app on the LAN); which clients it works from; user reports.",
+      "score": {"type": "enum", "values": [
+        {"value": "Native", "points": 1.0},
+        {"value": "Via tunnel", "points": 0.7},
+        {"value": "DIY", "points": 0.3},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C26", "group": "F", "name": "Output routing to own storage", "tag": "daniel", "priority": "normal",
+      "asks": "Can conversations, outputs or files be routed as they happen to storage you own (Drive folder, S3/R2, Git repo, webhook, local folder)?",
+      "basis": "Destinations supported; automatic vs manual; format (Markdown, JSON). Expected to be rare (not seen anywhere by Daniel, 2026-10-31).",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.5},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C27", "group": "F", "name": "Backup / export API", "tag": "daniel", "priority": "normal",
+      "asks": "Is there a native API or scheduled export for getting your data out (conversations, projects, memory, files)?",
+      "basis": "What is included (memory and project files often missing); format; whether business plans get a compliance/export API consumer plans don't.",
+      "score": {"type": "enum", "values": [
+        {"value": "API", "points": 1.0},
+        {"value": "Scheduled export", "points": 0.7},
+        {"value": "Manual export only", "points": 0.3},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C28", "group": "F", "name": "Bring your own memory", "tag": "daniel", "priority": "normal",
+      "asks": "Is there first-party support for using your own memory store, or are you forced onto the built-in memory?",
+      "basis": "Whether built-in memory can be disabled, viewed, edited and exported; whether an external memory connector is an official backend or a workaround.",
+      "score": {"type": "enum", "values": [
+        {"value": "First-party BYO", "points": 1.0},
+        {"value": "Workaround", "points": 0.5},
+        {"value": "Forced built-in", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C35", "group": "G", "name": "Agent-to-agent (A2A) support", "tag": "daniel", "priority": "top",
+      "asks": "Can the assistant call, be called by, and delegate between agents? Via an open protocol (e.g. A2A) or a proprietary one?",
+      "basis": "Direction (calls, is called, both); protocol and version; auth between agents; whether delegated agents keep their tools and connectors; how results return. Links to C31.",
+      "score": {"type": "enum", "values": [
+        {"value": "Standard A2A", "points": 1.0},
+        {"value": "Proprietary", "points": 0.6},
+        {"value": "Subagents only", "points": 0.3},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C29", "group": "G", "name": "Background agents, scheduled tasks and reminders", "tag": "daniel", "priority": "normal",
+      "asks": "Can you create background or persistent agents that run without an open chat, and schedule future tasks and reminders?",
+      "basis": "Where they run (vendor cloud, your machine); connector and custom MCP access; delivery (push, email, in chat); limits on number/frequency; whether they run with all clients closed. Links to C20.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.5, "meaning": "reminders only, or tasks without connector access"},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C22", "group": "G", "name": "Project boundaries and where project data lives", "tag": "daniel", "priority": "normal",
+      "asks": "Can you define projects that bound context, files, instructions and connectors? Is project data in the cloud or local?",
+      "basis": "What a project scopes (instructions, files, memory, history, connectors); whether memory leaks across projects or can be isolated; cross-device sync.",
+      "score": {"type": "enum", "qualifier": {"name": "storage", "values": ["Cloud", "Local", "Both"]}, "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.5},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C21", "group": "G", "name": "Parallel CLI coding product", "tag": "daniel", "priority": "normal",
+      "asks": "Does the vendor ship a CLI coding agent alongside the chat assistant, and how does it relate to the chat app?",
+      "basis": "Product name; same subscription or not; whether chat-app connectors/MCP carry over to the CLI; whether a cloud coding agent shows up in the chat app.",
+      "score": {"type": "enum", "qualifier": {"name": "product name"}, "values": [
+        {"value": "Integrated", "points": 1.0},
+        {"value": "Partly shared", "points": 0.7},
+        {"value": "Separate workspace", "points": 0.5},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ], "note": "criteria.md scores Yes/No plus a relationship; the relationship values above imply Yes."}
+    },
+    {
+      "id": "C37", "group": "G", "name": "CLI working-directory binding", "tag": "daniel", "priority": "normal",
+      "asks": "How tightly is the CLI bound to the directory it was launched in?",
+      "basis": "Enforcement by permission system or sandbox; how extra directories are added (flag, command, config); whether config and memory are keyed to the CWD; whether it can run from ~ as a general assistant.",
+      "score": {"type": "enum", "values": [
+        {"value": "Arbitrary", "points": 1.0},
+        {"value": "Expandable", "points": 0.7},
+        {"value": "Strict", "points": 0.2},
+        {"value": "N/A", "points": null, "meaning": "no vendor CLI"},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C38", "group": "G", "name": "Native GitHub integration", "tag": "daniel", "priority": "normal",
+      "asks": "Is there a native, vendor-supported GitHub integration, rather than only a custom MCP server or the CLI calling gh?",
+      "basis": "Connector vs GitHub App vs OAuth; private repo and org access; supported actions; chat, coding agent, or both; whether the cloud coding agent can open PRs.",
+      "score": {"type": "enum", "values": [
+        {"value": "Read-write", "points": 1.0},
+        {"value": "Read-only", "points": 0.5},
+        {"value": "Custom only", "points": 0.2},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C13", "group": "H", "name": "Linux desktop app", "tag": "daniel", "priority": "normal",
+      "asks": "Is there an official Linux desktop app?",
+      "basis": "Distribution channels (deb, rpm, AppImage, Flatpak, Snap, AUR, tarball); for a PWA, how it installs and what it loses (global hotkey, local MCP, dictation). Community clients score No and are named.",
+      "score": {"type": "enum", "qualifier": {"name": "type", "values": ["deb", "rpm", "AppImage", "Flatpak", "Snap", "AUR", "tarball", "PWA"]}, "values": [
+        {"value": "Yes (native)", "points": 1.0},
+        {"value": "Yes (PWA)", "points": 0.5},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C14", "group": "H", "name": "Linux CLI", "tag": "daniel", "priority": "normal",
+      "asks": "Is there an official CLI client that runs on Linux and uses the same account/subscription (not just a raw API key)?",
+      "basis": "Install type (npm, pip/uv, binary, Homebrew, apt/repo, cargo, go install, Docker); whether it works only with API billing.",
+      "score": {"type": "enum", "qualifier": {"name": "type", "values": ["npm", "pip/uv", "binary", "Homebrew", "apt/repo", "cargo", "go install", "Docker"]}, "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C15", "group": "H", "name": "Android app", "tag": "daniel", "priority": "normal",
+      "asks": "Is there an official Android app?",
+      "basis": "Distribution channel (Play Store, APK, F-Droid; PWA scores No unless it is the vendor's official Android app).",
+      "score": {"type": "enum", "qualifier": {"name": "type", "values": ["Play Store", "APK", "F-Droid", "PWA"]}, "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C16", "group": "H", "name": "Cross-device conversation history sync", "tag": "daniel", "priority": "normal",
+      "asks": "Is conversation history synced through the cloud across web, desktop, Android and CLI?",
+      "basis": "Which clients are in the sync and which keep history local.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "Partial", "points": 0.5},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C17", "group": "H", "name": "Native speech-to-text, desktop", "tag": "daniel", "priority": "normal",
+      "asks": "Does the desktop client (or web app, if no desktop app) have built-in voice dictation into the chat input?",
+      "basis": "Dictation vs full voice-conversation mode; whether it works on the Linux client specifically.",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    },
+    {
+      "id": "C18", "group": "H", "name": "Native speech-to-text, Android", "tag": "daniel", "priority": "normal",
+      "asks": "Does the Android app have built-in voice dictation beyond the system keyboard's?",
+      "basis": "Dictation vs voice mode; language support (Hebrew if known).",
+      "score": {"type": "enum", "values": [
+        {"value": "Yes", "points": 1.0},
+        {"value": "No", "points": 0.0},
+        {"value": "?", "points": null}
+      ]}
+    }
+  ]
+}
