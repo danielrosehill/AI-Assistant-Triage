@@ -1,6 +1,6 @@
 # Triage criteria
 
-_Last changed 2026-10-31. Criteria are a mix of general ones and ones specific to Daniel's use; each is tagged `general` or `daniel`._
+_Last changed 2026-10-31. Criteria are a mix of general ones and ones specific to Daniel's use; each is tagged `general` or `daniel`, and `priority: high` where Daniel has said it is critical._
 
 Triage looks at two things per criterion: **whether** the feature exists, and **how**
 it is implemented (e.g. remote vs local MCP, OAuth vs pasted key, per-chat vs global
@@ -56,3 +56,47 @@ the real cost of using the platform agentically is much higher than its entry pr
 **Record:** which tiers get what, the cheapest tier with connector access and its
 monthly price (note currency and region; no US egress from this machine), and whether
 custom connectors are gated differently from catalogue ones.
+
+## Google Workspace group (C03-C07)
+
+Daniel flagged this group as very important. Score them together. For every one, the
+implementation note must say **how** access is provided: a native vendor connector, a
+catalogue connector built by a third party, or only via a custom MCP server the user
+hosts. Only the first two count as `Yes`; custom-MCP-only scores `Partial`.
+Also note whether the connector works for personal Google accounts, Workspace (business)
+accounts, or both.
+
+Access-level scores for C04, C05 and C07: `Read-write`, `Read-only`, `None`, `?`.
+Read-write means the assistant can create or modify (e.g. upload/edit a Drive file,
+send or draft an email, create/edit a contact), not just search and read.
+
+### C03 Google Workspace integration (`daniel`, `priority: high`)
+
+**Asks:** Does the platform support Google Workspace integration at all?
+
+**Score:** `Yes` / `Partial` / `No` / `?`, per the rules above.
+
+### C04 Google Drive access level (`daniel`, `priority: high`)
+
+**Asks:** Is Google Drive access read-only or read-write?
+
+**Record:** whether it searches/reads Docs, Sheets and arbitrary files or only some
+types; whether write means creating new files, editing existing ones, or both.
+
+### C05 Gmail access level (`daniel`, `priority: high`)
+
+**Asks:** Is Gmail access read-only or read-write?
+
+**Record:** whether write means sending directly, creating drafts only, or labelling/
+archiving. Draft-only is scored `Read-write` with that noted.
+
+### C06 Gmail attachments (`daniel`, `priority: high`)
+
+**Asks:** Does the Gmail integration support attachments?
+
+**Score:** `Both` (read incoming attachments and send with attachments), `Read only`,
+`Send only`, `None`, `?`.
+
+### C07 Google Contacts access level (`daniel`, `priority: high`)
+
+**Asks:** Is Google Contacts access read-only or read-write?
