@@ -39,6 +39,10 @@ connector notes, MCP transport, sources and evidence level: [`candidates.json`](
 - Self-hosted or self-deployed (BYOK): LibreChat, Open WebUI, LobeHub (formerly LobeChat).
 - Desktop (BYOK): AnythingLLM, Cherry Studio, Msty Studio, Jan, Chatbox, Raycast AI,
   Witsy, 5ire, Goose (also a coding agent; scope check).
+- Added 2026-10-31 for the Google Workspace / multi-account gap (SaaS / Third-party,
+  integration-first): **Lindy** (strong lead: docs say several Gmail/Outlook inboxes,
+  tier-capped at 2/3/5, read-write with approvals, custom MCP); Relevance AI, Superhuman
+  Go, Tasklet, Gumloop Agents, Dust, Poke, Zapier Agents, Jenova, meinGPT (maybe).
 
 ## Criteria
 
